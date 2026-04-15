@@ -3,154 +3,168 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shopify Specialist | Portfolio</title>
+  <title>Shopify Specialist</title>
 
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #f7f7f7;
-      color: #111;
     }
 
-    header {
+    /* ===== HEADER ===== */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
       background: #000;
       color: #fff;
-      padding: 60px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    /* Menu Icon */
+    .menu-icon {
+      font-size: 26px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    /* Right side title */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .brand-icon {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+    }
+
+    /* ===== SIDE MENU ===== */
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100%;
+      background: #fff;
+      padding: 80px 20px;
+      box-shadow: 5px 0 20px rgba(0,0,0,0.1);
+      transition: 0.3s ease;
+      z-index: 999;
+    }
+
+    .side-menu a {
+      display: block;
+      margin: 20px 0;
+      font-size: 18px;
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .side-menu.active {
+      left: 0;
+    }
+
+    /* Move icon when active */
+    .menu-icon.active {
+      transform: translateX(200px);
+    }
+
+    /* ===== CONTENT ===== */
+    .hero {
+      padding: 80px 20px;
       text-align: center;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 36px;
+    .hero h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
     }
 
-    header p {
-      margin-top: 10px;
-      font-size: 18px;
-      opacity: 0.8;
-    }
-
-    section {
-      max-width: 1000px;
+    .section {
+      max-width: 900px;
       margin: 40px auto;
       padding: 0 20px;
-    }
-
-    h2 {
-      border-bottom: 2px solid #000;
-      display: inline-block;
-      padding-bottom: 5px;
-      margin-bottom: 20px;
     }
 
     .card {
       background: #fff;
       padding: 20px;
-      margin-bottom: 20px;
       border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
     }
 
-    .skills span {
-      display: inline-block;
-      background: #000;
-      color: #fff;
-      padding: 8px 12px;
-      margin: 5px;
-      border-radius: 20px;
-      font-size: 14px;
+    /* ===== MOBILE ===== */
+    @media (min-width: 768px) {
+      .menu-icon {
+        display: none;
+      }
+
+      .side-menu {
+        display: none;
+      }
     }
 
-    .projects a {
-      display: block;
-      margin-top: 10px;
-      color: #000;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px;
-      background: #000;
-      color: #fff;
-      margin-top: 50px;
-    }
-
-    .btn {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 12px 20px;
-      background: #000;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-
-    .btn:hover {
-      background: #333;
-    }
   </style>
 </head>
 <body>
 
-<header>
+<!-- HEADER -->
+<div class="header">
+  <div class="menu-icon" onclick="toggleMenu()" id="menuBtn">☰</div>
+
+  <div class="brand">
+    SHOPIFY EXPERT
+    <div class="brand-icon"></div>
+  </div>
+</div>
+
+<!-- SIDE MENU -->
+<div class="side-menu" id="sideMenu">
+  <a href="#">About Me</a>
+  <a href="#">Projects</a>
+  <a href="#">Contact</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="hero">
   <h1>Your Name</h1>
-  <p>Shopify Specialist | E-commerce Manager</p>
-  <a href="#contact" class="btn">Contact Me</a>
-</header>
+  <p>Shopify Specialist & E-commerce Manager</p>
+</div>
 
-<section>
-  <h2>About Me</h2>
+<div class="section">
   <div class="card">
-    <p>
-      I am a Shopify specialist with experience in building, customizing, and optimizing e-commerce stores.
-      I help brands create high-converting online stores with clean design and strong user experience.
-    </p>
-  </div>
-</section>
-
-<section>
-  <h2>Skills</h2>
-  <div class="card skills">
-    <span>Shopify Store Setup</span>
-    <span>Theme Customization</span>
-    <span>Liquid</span>
-    <span>CSS & HTML</span>
-    <span>Product Page Optimization</span>
-    <span>Conversion Optimization</span>
-    <span>Mobile Optimization</span>
-  </div>
-</section>
-
-<section>
-  <h2>Projects</h2>
-  <div class="card projects">
-    <p><strong>Custom Shopify Store</strong></p>
-    <p>Developed a fully customized Shopify store with advanced navigation and mobile optimization.</p>
-    <a href="#">View Project</a>
+    <h2>About Me</h2>
+    <p>I build, customize, and optimize Shopify stores with a focus on clean UX and high conversion.</p>
   </div>
 
-  <div class="card projects">
-    <p><strong>Product Page Optimization</strong></p>
-    <p>Improved UX and increased conversions through layout restructuring and UI improvements.</p>
-    <a href="#">View Project</a>
-  </div>
-</section>
-
-<section id="contact">
-  <h2>Contact</h2>
   <div class="card">
+    <h2>Projects</h2>
+    <p>Describe your real Shopify work here.</p>
+  </div>
+
+  <div class="card">
+    <h2>Contact</h2>
     <p>Email: your@email.com</p>
-    <p>Upwork: your-profile-link</p>
-    <p>GitHub: your-github-link</p>
   </div>
-</section>
+</div>
 
-<footer>
-  <p>© 2026 Your Name | Shopify Specialist</p>
-</footer>
+<script>
+  function toggleMenu() {
+    document.getElementById("sideMenu").classList.toggle("active");
+    document.getElementById("menuBtn").classList.toggle("active");
+  }
+</script>
 
 </body>
 </html>

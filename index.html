@@ -1,219 +1,235 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shopify Specialist</title>
+let tasks = [];
+let currentFilter = 'all';
+let dragStartIndex = null;
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <style>
-    /* ===== RESET ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+function loadTasks() {
+    const saved = localStorage.getItem('tasks');
+    if (saved) {
+        tasks = JSON.parse(saved);
+    } else {
+        tasks = [];
     }
+    renderAll();
+}
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background: #f9fafb;
+function saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function addTask(text) {
+    if (!text.trim()) return;
+    
+    const task = {
+        id: Date.now(),
+        text: text.trim(),
+        completed: false,
+        createdAt: new Date().toISOString()
+    };
+    
+    tasks.push(task);
+    saveTasks();
+    renderAll();
+    
+    document.getElementById('taskInput').value = '';
+}
+
+function deleteTask(id) {
+    tasks = tasks.filter(task => task.id !== id);
+    saveTasks();
+    renderAll();
+}
+
+function toggleTask(id) {
+    const task = tasks.find(t => t.id === id);
+    if (task) {
+        task.completed = !task.completed;
+        saveTasks();
+        renderAll();
     }
+}
 
-    /* ===== CONTAINER ===== */
-    .container {
-      width: 90%;
-      max-width: 1100px;
-      margin: auto;
+function clearCompleted() {
+    tasks = tasks.filter(task => !task.completed);
+    saveTasks();
+    renderAll();
+}
+
+function updateStats() {
+    const total = tasks.length;
+    const completed = tasks.filter(t => t.completed).length;
+    const pending = total - completed;
+    
+    document.getElementById('totalTasks').textContent = total;
+    document.getElementById('completedTasks').textContent = completed;
+    document.getElementById('pendingTasks').textContent = pending;
+}
+
+function getFilteredTasks() {
+    if (currentFilter === 'active') {
+        return tasks.filter(t => !t.completed);
+    } else if (currentFilter === 'completed') {
+        return tasks.filter(t => t.completed);
     }
+    return tasks;
+}
 
-    /* ===== HERO SECTION ===== */
-    .hero {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      text-align: center;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: white;
-      padding: 20px;
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffDays = Math.floor((now - date) / (1000 * 60 * 60 * 24));
+    
+    if (diffDays === 0) {
+        return `Today at ${date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
+    } else if (diffDays === 1) {
+        return 'Yesterday';
+    } else if (diffDays < 7) {
+        return `${diffDays} days ago`;
+    } else {
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     }
+}
 
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 15px;
+function escapeHtml(str) {
+    return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+    });
+}
+
+function renderTasks() {
+    const filteredTasks = getFilteredTasks();
+    const taskList = document.getElementById('taskList');
+    
+    if (filteredTasks.length === 0) {
+        taskList.innerHTML = `
+            <div class="empty-state">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+                <p>No tasks yet</p>
+                <span>Add a task to get started</span>
+            </div>
+        `;
+        return;
     }
+    
+    taskList.innerHTML = filteredTasks.map((task, index) => `
+        <div class="task-item ${task.completed ? 'completed' : ''}" draggable="true" data-index="${index}" data-id="${task.id}">
+            <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTask(${task.id})">
+            <div class="task-content">
+                <span class="task-text">${escapeHtml(task.text)}</span>
+                <span class="task-date">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    ${formatDate(task.createdAt)}
+                </span>
+            </div>
+            <button class="delete-task" onclick="deleteTask(${task.id})">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+    `).join('');
+    
+    addDragListeners();
+}
 
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 25px;
-      color: #cbd5f5;
+function addDragListeners() {
+    const items = document.querySelectorAll('.task-item');
+    
+    items.forEach(item => {
+        item.addEventListener('dragstart', handleDragStart);
+        item.addEventListener('dragover', handleDragOver);
+        item.addEventListener('drop', handleDrop);
+        item.addEventListener('dragend', handleDragEnd);
+    });
+}
+
+function handleDragStart(e) {
+    const item = e.target.closest('.task-item');
+    if (item) {
+        dragStartIndex = parseInt(item.dataset.index);
+        item.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
     }
+}
 
-    /* CTA BUTTON */
-    .btn {
-      display: inline-block;
-      padding: 12px 28px;
-      background: #4f46e5;
-      color: white;
-      text-decoration: none;
-      border-radius: 30px;
-      transition: 0.3s;
-      font-weight: 500;
-    }
+function handleDragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+}
 
-    .btn:hover {
-      background: #6366f1;
-      transform: translateY(-3px);
-    }
-
-    /* ===== SECTION GENERAL ===== */
-    section {
-      padding: 70px 0;
-    }
-
-    section h2 {
-      text-align: center;
-      margin-bottom: 40px;
-      font-size: 2rem;
-      color: #111827;
-    }
-
-    /* ===== ABOUT ===== */
-    .about p {
-      text-align: center;
-      max-width: 700px;
-      margin: auto;
-      color: #555;
-    }
-
-    /* ===== FEATURES ===== */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-    }
-
-    .feature-card {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-      transition: 0.3s;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    }
-
-    .feature-card h3 {
-      margin-bottom: 10px;
-      color: #4f46e5;
-    }
-
-    /* ===== CONTACT ===== */
-    .contact {
-      text-align: center;
-    }
-
-    .contact p {
-      margin-bottom: 20px;
-      color: #555;
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #111827;
-      color: #aaa;
-      font-size: 0.9rem;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2.2rem;
-      }
-
-      .hero p {
-        font-size: 1rem;
-      }
-    }
-
-  </style>
-</head>
-
-<body>
-
-  <!-- ===== HERO SECTION ===== -->
-  <section class="hero">
-    <div class="container">
-      <h1>Shopify Specialist</h1>
-      <p>I build high-converting Shopify stores that drive sales and growth</p>
-      <a href="#contact" class="btn">Get in Touch</a>
-    </div>
-  </section>
-
-  <!-- ===== ABOUT SECTION ===== -->
-  <section class="about">
-    <div class="container">
-      <h2>About Me</h2>
-      <p>
-        I am a professional Shopify specialist helping brands launch, optimize, 
-        and scale their online stores. From design to conversion optimization, 
-        I create seamless eCommerce experiences that turn visitors into customers.
-      </p>
-    </div>
-  </section>
-
-  <!-- ===== FEATURES / SERVICES ===== -->
-  <section>
-    <div class="container">
-      <h2>Services & Benefits</h2>
-
-      <div class="features">
+function handleDrop(e) {
+    e.preventDefault();
+    const targetItem = e.target.closest('.task-item');
+    if (targetItem && dragStartIndex !== null) {
+        const dragEndIndex = parseInt(targetItem.dataset.index);
         
-        <div class="feature-card">
-          <h3>Store Design</h3>
-          <p>Modern, clean, and responsive Shopify stores tailored to your brand.</p>
-        </div>
+        if (dragStartIndex !== dragEndIndex) {
+            const filteredTasks = getFilteredTasks();
+            const draggedTask = filteredTasks[dragStartIndex];
+            
+            if (draggedTask) {
+                const actualTask = tasks.find(t => t.id === draggedTask.id);
+                if (actualTask) {
+                    const actualIndex = tasks.findIndex(t => t.id === actualTask.id);
+                    const targetActualTask = tasks.find(t => t.id === parseInt(targetItem.dataset.id));
+                    const targetActualIndex = tasks.findIndex(t => t.id === targetActualTask.id);
+                    
+                    if (actualIndex !== -1 && targetActualIndex !== -1) {
+                        tasks.splice(actualIndex, 1);
+                        tasks.splice(targetActualIndex, 0, actualTask);
+                        saveTasks();
+                        renderAll();
+                    }
+                }
+            }
+        }
+    }
+}
 
-        <div class="feature-card">
-          <h3>Conversion Optimization</h3>
-          <p>Optimized layouts and UX to increase sales and engagement.</p>
-        </div>
+function handleDragEnd(e) {
+    const item = e.target.closest('.task-item');
+    if (item) {
+        item.classList.remove('dragging');
+    }
+    dragStartIndex = null;
+}
 
-        <div class="feature-card">
-          <h3>Speed Optimization</h3>
-          <p>Fast-loading stores to improve SEO and user experience.</p>
-        </div>
+function renderAll() {
+    updateStats();
+    renderTasks();
+}
 
-        <div class="feature-card">
-          <h3>Custom Development</h3>
-          <p>Advanced Shopify customizations and feature integrations.</p>
-        </div>
+document.getElementById('addTaskBtn').addEventListener('click', () => {
+    const input = document.getElementById('taskInput');
+    addTask(input.value);
+});
 
-      </div>
-    </div>
-  </section>
+document.getElementById('taskInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        addTask(e.target.value);
+    }
+});
 
-  <!-- ===== CONTACT SECTION ===== -->
-  <section class="contact" id="contact">
-    <div class="container">
-      <h2>Contact</h2>
-      <p>Ready to build or improve your Shopify store?</p>
-      <a href="mailto:your@email.com" class="btn">Contact Me</a>
-    </div>
-  </section>
+document.getElementById('clearCompletedBtn').addEventListener('click', () => {
+    clearCompleted();
+});
 
-  <!-- ===== FOOTER ===== -->
-  <footer>
-    <p>© 2026 Shopify Specialist | All Rights Reserved</p>
-  </footer>
+document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentFilter = tab.dataset.filter;
+        renderAll();
+    });
+});
 
-</body>
-</html>
+loadTasks();

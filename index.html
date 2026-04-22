@@ -1,235 +1,232 @@
-let tasks = [];
-let currentFilter = 'all';
-let dragStartIndex = null;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopify Specialist</title>
 
-function loadTasks() {
-    const saved = localStorage.getItem('tasks');
-    if (saved) {
-        tasks = JSON.parse(saved);
-    } else {
-        tasks = [];
-    }
-    renderAll();
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-function saveTasks() {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+body {
+  background: #fff;
+  color: #000;
 }
 
-function addTask(text) {
-    if (!text.trim()) return;
+/* HEADER */
+.header {
+  background: #95BF47;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.logo {
+  font-weight: 600;
+}
+
+/* SIDE MENU */
+#menu-toggle {
+  display: none;
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 260px;
+  height: 100%;
+  background: #fff;
+  padding: 20px;
+  transition: 0.3s;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+
+#menu-toggle:checked ~ .side-menu {
+  left: 0;
+}
+
+.menu-title {
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.menu-item {
+  margin: 15px 0;
+  cursor: pointer;
+  color: #000;
+  text-decoration: none;
+  display: block;
+}
+
+/* CONTENT */
+.container {
+  padding: 100px 20px 40px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* IMAGE BLOCK */
+.image-block {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.image-text {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: #fff;
+  background: rgba(0,0,0,0.5);
+  padding: 10px;
+  max-width: 80%;
+}
+
+/* TITLES */
+.section-title {
+  color: #95BF47;
+  text-align: center;
+  margin: 40px 0 20px;
+  font-weight: 600;
+}
+
+.line {
+  height: 4px;
+  background: #000;
+  margin: 10px 0;
+}
+
+/* POPUPS */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+}
+
+.popup:target {
+  display: flex;
+}
+
+/* LINKS */
+a {
+  color: inherit;
+}
+
+/* MOBILE */
+@media(max-width: 768px) {
+  .image-text {
+    font-size: 14px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <label for="menu-toggle" class="menu-icon">&#9776;</label>
+  <div class="logo">SHOPIFY EXPERT</div>
+</div>
+
+<input type="checkbox" id="menu-toggle">
+
+<!-- SIDE MENU -->
+<div class="side-menu">
+  <div class="menu-title">Shopify Specialist</div>
+
+  <a href="#main" class="menu-item">Main Page</a>
+  <a href="#about-popup" class="menu-item">About Me</a>
+  <a href="#services-popup" class="menu-item">Services</a>
+  <a href="YOUR_SHOPIFY_LINK_HERE" class="menu-item">Hire Me</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container" id="main">
+
+  <!-- IMAGE BLOCK -->
+  <div class="image-block">
+    <!-- ADD YOUR IMAGE HTML BELOW -->
     
-    const task = {
-        id: Date.now(),
-        text: text.trim(),
-        completed: false,
-        createdAt: new Date().toISOString()
-    };
-    
-    tasks.push(task);
-    saveTasks();
-    renderAll();
-    
-    document.getElementById('taskInput').value = '';
-}
+    <div class="image-text">
+      I help set up and manage Shopify stores with a focus on clean structure and accurate product data.
+    </div>
+  </div>
 
-function deleteTask(id) {
-    tasks = tasks.filter(task => task.id !== id);
-    saveTasks();
-    renderAll();
-}
+  <!-- ABOUT -->
+  <div class="line"></div>
+  <h2 class="section-title">ABOUT THE SPECIALIST</h2>
+  <div class="line"></div>
 
-function toggleTask(id) {
-    const task = tasks.find(t => t.id === id);
-    if (task) {
-        task.completed = !task.completed;
-        saveTasks();
-        renderAll();
-    }
-}
+  <p>
+    <!-- ADD YOUR ABOUT TEXT HERE -->
+  </p>
 
-function clearCompleted() {
-    tasks = tasks.filter(task => !task.completed);
-    saveTasks();
-    renderAll();
-}
+  <!-- IMAGE BLOCK -->
+  <div class="image-block">
+    <!-- ADD YOUR SECOND IMAGE HTML HERE -->
+  </div>
 
-function updateStats() {
-    const total = tasks.length;
-    const completed = tasks.filter(t => t.completed).length;
-    const pending = total - completed;
-    
-    document.getElementById('totalTasks').textContent = total;
-    document.getElementById('completedTasks').textContent = completed;
-    document.getElementById('pendingTasks').textContent = pending;
-}
+  <!-- SERVICES -->
+  <h2 class="section-title">SERVICES</h2>
+  <p>
+    <!-- ADD YOUR SERVICES TEXT HERE -->
+  </p>
 
-function getFilteredTasks() {
-    if (currentFilter === 'active') {
-        return tasks.filter(t => !t.completed);
-    } else if (currentFilter === 'completed') {
-        return tasks.filter(t => t.completed);
-    }
-    return tasks;
-}
+  <!-- HIRE -->
+  <h2 class="section-title">HIRE ME ON UPWORK</h2>
+  <p>
+    <a href="YOUR_UPWORK_LINK_HERE">Go to my Upwork Profile</a>
+  </p>
 
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffDays = Math.floor((now - date) / (1000 * 60 * 60 * 24));
-    
-    if (diffDays === 0) {
-        return `Today at ${date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
-    } else if (diffDays === 1) {
-        return 'Yesterday';
-    } else if (diffDays < 7) {
-        return `${diffDays} days ago`;
-    } else {
-        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-    }
-}
+</div>
 
-function escapeHtml(str) {
-    return str.replace(/[&<>]/g, function(m) {
-        if (m === '&') return '&amp;';
-        if (m === '<') return '&lt;';
-        if (m === '>') return '&gt;';
-        return m;
-    });
-}
+<!-- POPUPS -->
+<div id="about-popup" class="popup">
+  <div class="popup-content">
+    <p><!-- ABOUT TEXT HERE --></p>
+    <a href="#">Close</a>
+  </div>
+</div>
 
-function renderTasks() {
-    const filteredTasks = getFilteredTasks();
-    const taskList = document.getElementById('taskList');
-    
-    if (filteredTasks.length === 0) {
-        taskList.innerHTML = `
-            <div class="empty-state">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                    <polyline points="22 4 12 14.01 9 11.01"/>
-                </svg>
-                <p>No tasks yet</p>
-                <span>Add a task to get started</span>
-            </div>
-        `;
-        return;
-    }
-    
-    taskList.innerHTML = filteredTasks.map((task, index) => `
-        <div class="task-item ${task.completed ? 'completed' : ''}" draggable="true" data-index="${index}" data-id="${task.id}">
-            <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTask(${task.id})">
-            <div class="task-content">
-                <span class="task-text">${escapeHtml(task.text)}</span>
-                <span class="task-date">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12 6 12 12 16 14"/>
-                    </svg>
-                    ${formatDate(task.createdAt)}
-                </span>
-            </div>
-            <button class="delete-task" onclick="deleteTask(${task.id})">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18"/>
-                    <line x1="6" y1="6" x2="18" y2="18"/>
-                </svg>
-            </button>
-        </div>
-    `).join('');
-    
-    addDragListeners();
-}
+<div id="services-popup" class="popup">
+  <div class="popup-content">
+    <p><!-- SERVICES TEXT HERE --></p>
+    <a href="#">Close</a>
+  </div>
+</div>
 
-function addDragListeners() {
-    const items = document.querySelectorAll('.task-item');
-    
-    items.forEach(item => {
-        item.addEventListener('dragstart', handleDragStart);
-        item.addEventListener('dragover', handleDragOver);
-        item.addEventListener('drop', handleDrop);
-        item.addEventListener('dragend', handleDragEnd);
-    });
-}
-
-function handleDragStart(e) {
-    const item = e.target.closest('.task-item');
-    if (item) {
-        dragStartIndex = parseInt(item.dataset.index);
-        item.classList.add('dragging');
-        e.dataTransfer.effectAllowed = 'move';
-    }
-}
-
-function handleDragOver(e) {
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
-}
-
-function handleDrop(e) {
-    e.preventDefault();
-    const targetItem = e.target.closest('.task-item');
-    if (targetItem && dragStartIndex !== null) {
-        const dragEndIndex = parseInt(targetItem.dataset.index);
-        
-        if (dragStartIndex !== dragEndIndex) {
-            const filteredTasks = getFilteredTasks();
-            const draggedTask = filteredTasks[dragStartIndex];
-            
-            if (draggedTask) {
-                const actualTask = tasks.find(t => t.id === draggedTask.id);
-                if (actualTask) {
-                    const actualIndex = tasks.findIndex(t => t.id === actualTask.id);
-                    const targetActualTask = tasks.find(t => t.id === parseInt(targetItem.dataset.id));
-                    const targetActualIndex = tasks.findIndex(t => t.id === targetActualTask.id);
-                    
-                    if (actualIndex !== -1 && targetActualIndex !== -1) {
-                        tasks.splice(actualIndex, 1);
-                        tasks.splice(targetActualIndex, 0, actualTask);
-                        saveTasks();
-                        renderAll();
-                    }
-                }
-            }
-        }
-    }
-}
-
-function handleDragEnd(e) {
-    const item = e.target.closest('.task-item');
-    if (item) {
-        item.classList.remove('dragging');
-    }
-    dragStartIndex = null;
-}
-
-function renderAll() {
-    updateStats();
-    renderTasks();
-}
-
-document.getElementById('addTaskBtn').addEventListener('click', () => {
-    const input = document.getElementById('taskInput');
-    addTask(input.value);
-});
-
-document.getElementById('taskInput').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        addTask(e.target.value);
-    }
-});
-
-document.getElementById('clearCompletedBtn').addEventListener('click', () => {
-    clearCompleted();
-});
-
-document.querySelectorAll('.filter-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        currentFilter = tab.dataset.filter;
-        renderAll();
-    });
-});
-
-loadTasks();
+</body>
+</html>

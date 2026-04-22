@@ -89,6 +89,20 @@ body {
 .image-block {
   position: relative;
   margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.image-container {
+  max-width: 400px;
+  width: 90%;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
 .image-text {
@@ -96,9 +110,10 @@ body {
   bottom: 20px;
   left: 20px;
   color: #fff;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.6);
   padding: 10px;
   max-width: 80%;
+  border-radius: 6px;
 }
 
 /* TITLES */
@@ -139,11 +154,6 @@ body {
   display: flex;
 }
 
-/* LINKS */
-a {
-  color: inherit;
-}
-
 /* MOBILE */
 @media(max-width: 768px) {
   .image-text {
@@ -176,10 +186,12 @@ a {
 <!-- MAIN CONTENT -->
 <div class="container" id="main">
 
-  <!-- IMAGE BLOCK -->
+  <!-- FIRST IMAGE BLOCK -->
   <div class="image-block">
-    <!-- ADD YOUR IMAGE HTML BELOW -->
-    
+    <div class="image-container">
+      <img src="your-image.jpg" alt="Professional Portrait">
+    </div>
+
     <div class="image-text">
       I help set up and manage Shopify stores with a focus on clean structure and accurate product data.
     </div>
@@ -194,7 +206,7 @@ a {
     <!-- ADD YOUR ABOUT TEXT HERE -->
   </p>
 
-  <!-- IMAGE BLOCK -->
+  <!-- SECOND IMAGE BLOCK -->
   <div class="image-block">
     <!-- ADD YOUR SECOND IMAGE HTML HERE -->
   </div>

@@ -25,28 +25,38 @@ body {
   background: #95BF47;
   color: #fff;
   padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
   position: fixed;
   width: 100%;
   top: 0;
+  z-index: 1000;
 }
 
-/* HERO */
+/* HERO WITH BACKGROUND IMAGE */
 .hero {
-  padding: 140px 20px 80px;
+  height: 100vh;
+  background: 
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("https://raw.githubusercontent.com/lusi-design/lusi-design/main/Screenshot%202026-04-25%20130710.png");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  background: #f8f9f6;
+  color: #fff;
+  padding: 20px;
+}
+
+.hero-content {
+  max-width: 700px;
 }
 
 .hero h1 {
-  font-size: 32px;
+  font-size: 34px;
   margin-bottom: 15px;
 }
 
 .hero p {
-  max-width: 600px;
-  margin: auto;
   margin-bottom: 25px;
 }
 
@@ -121,18 +131,20 @@ body {
 
 <!-- HEADER -->
 <div class="header">
-  <div>SHOPIFY EXPERT</div>
+  SHOPIFY EXPERT
 </div>
 
 <!-- HERO -->
 <section class="hero">
-  <h1>Clean & Structured Shopify Stores That Are Easy to Manage</h1>
-  <p>
-    I help merchants organize, structure, and optimize Shopify stores with accurate product data and clean setup.
-  </p>
-  <a href="https://www.upwork.com/freelancers/~017444a64d53a8ae89?viewMode=1" class="btn" target="_blank">
-    View Upwork Profile
-  </a>
+  <div class="hero-content">
+    <h1>Clean & Structured Shopify Stores That Are Easy to Manage</h1>
+    <p>
+      I help merchants organize, structure, and optimize Shopify stores with accurate product data and clean setup.
+    </p>
+    <a href="https://www.upwork.com/freelancers/~017444a64d53a8ae89?viewMode=1" class="btn" target="_blank">
+      View Upwork Profile
+    </a>
+  </div>
 </section>
 
 <!-- ABOUT -->
@@ -140,15 +152,10 @@ body {
   <h2 class="section-title">About Me</h2>
 
   <div class="grid grid-2">
-
-    <!-- YOUR IMAGE (FIXED) -->
     <div>
-      <img src="https://raw.githubusercontent.com/lusi-design/lusi-design/main/Gemini_Generated_Image_b68t7xb68t7xb68t.png" 
-           alt="Profile Photo" 
-           class="profile-img">
+      <img src="https://raw.githubusercontent.com/lusi-design/lusi-design/main/Gemini_Generated_Image_b68t7xb68t7xb68t.png" class="profile-img">
     </div>
 
-    <!-- TEXT -->
     <div>
       <p>
         I am a detail-oriented and reliable Shopify Specialist dedicated to helping merchants build well-organized, high-performing online stores.
@@ -166,7 +173,6 @@ body {
         I ensure every store is logically structured, clean, and efficient to manage.
       </p>
     </div>
-
   </div>
 </section>
 

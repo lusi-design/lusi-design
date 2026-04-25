@@ -41,21 +41,26 @@ body {
   justify-content: center;
   text-align: center;
   color: #fff;
+  background-color: #000;
 }
 
-/* BACKGROUND LAYER */
+/* BACKGROUND IMAGE (FULLY VISIBLE) */
 .hero-bg {
   position: absolute;
   inset: 0;
+
   background:
-    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
     url("https://raw.githubusercontent.com/lusi-design/lusi-design/main/Screenshot%202026-04-25%20130710.png");
-  background-size: cover;
+
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
+
   z-index: 0;
 
-  transform: scale(1.2);
-  animation: zoomOut 6s ease forwards;
+  opacity: 0;
+  animation: fadeInBg 2.5s ease forwards;
 }
 
 /* HERO CONTENT */
@@ -65,6 +70,7 @@ body {
   max-width: 700px;
 
   opacity: 0;
+  transform: translateY(-30px);
   animation: fadeDown 1.5s ease forwards;
   animation-delay: 1s;
 }
@@ -144,22 +150,19 @@ body {
 }
 
 /* ANIMATIONS */
-
-/* Background zoom */
-@keyframes zoomOut {
+@keyframes fadeInBg {
   from {
-    transform: scale(1.2);
+    opacity: 0;
   }
   to {
-    transform: scale(1);
+    opacity: 1;
   }
 }
 
-/* Text drop */
 @keyframes fadeDown {
   from {
     opacity: 0;
-    transform: translateY(-40px);
+    transform: translateY(-30px);
   }
   to {
     opacity: 1;

@@ -16,7 +16,6 @@
 }
 
 body {
-  background: #fff;
   color: #222;
   line-height: 1.6;
 }
@@ -25,152 +24,41 @@ body {
 .header {
   background: #95BF47;
   color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 1000;
 }
 
-.menu-icon {
-  font-size: 24px;
-  cursor: pointer;
-}
-
-.logo {
-  font-weight: 600;
-}
-
-/* MENU TOGGLE */
-#menu-toggle {
-  display: none;
-}
-
-/* OVERLAY */
-.overlay {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.4);
-  top: 0;
-  left: 0;
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.3s;
-  z-index: 998;
-}
-
-#menu-toggle:checked ~ .overlay {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* SIDE MENU */
-.side-menu {
-  position: fixed;
-  top: 0;
-  left: -260px;
-  width: 260px;
-  height: 100%;
-  background: #fff;
-  padding: 25px;
-  transition: 0.3s ease;
-  box-shadow: 2px 0 15px rgba(0,0,0,0.1);
-  z-index: 999;
-}
-
-#menu-toggle:checked ~ .side-menu {
-  left: 0;
-}
-
-.menu-title {
-  font-weight: 600;
-  margin-bottom: 25px;
-}
-
-.menu-item {
-  margin: 15px 0;
-  cursor: pointer;
-  color: #222;
-  text-decoration: none;
-  display: block;
-  transition: 0.2s;
-}
-
-.menu-item:hover {
-  color: #95BF47;
-}
-
-/* CONTENT */
-.container {
-  padding: 110px 20px 50px;
-  max-width: 1000px;
-  margin: auto;
-}
-
-/* IMAGE BLOCK */
-.image-block {
-  position: relative;
-  margin-bottom: 50px;
-  display: flex;
-  justify-content: center;
-}
-
-.image-container {
-  max-width: 420px;
-  width: 100%;
-}
-
-.image-container img {
-  width: 100%;
-  border-radius: 14px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-}
-
-.image-text {
-  position: absolute;
-  bottom: 15px;
-  left: 15px;
-  color: #fff;
-  background: rgba(0,0,0,0.65);
-  padding: 12px;
-  max-width: 85%;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-/* TITLES */
-.section-title {
-  color: #95BF47;
+/* HERO */
+.hero {
+  padding: 140px 20px 80px;
   text-align: center;
-  margin: 50px 0 15px;
-  font-weight: 600;
-  letter-spacing: 1px;
+  background: #f8f9f6;
 }
 
-.line {
-  height: 3px;
-  background: #000;
-  margin: 10px auto 20px;
-  width: 60px;
+.hero h1 {
+  font-size: 32px;
+  margin-bottom: 15px;
 }
 
-/* TEXT */
-p {
-  margin-bottom: 20px;
+.hero p {
+  max-width: 600px;
+  margin: auto;
+  margin-bottom: 25px;
 }
 
 /* BUTTON */
 .btn {
-  display: inline-block;
-  padding: 12px 20px;
   background: #95BF47;
   color: #fff;
+  padding: 14px 22px;
   text-decoration: none;
   border-radius: 6px;
+  display: inline-block;
   transition: 0.2s;
 }
 
@@ -178,47 +66,53 @@ p {
   background: #7da83b;
 }
 
-/* POPUPS */
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1001;
+/* SECTIONS */
+.section {
+  padding: 60px 20px;
+  max-width: 1000px;
+  margin: auto;
 }
 
-.popup-content {
-  background: #fff;
-  padding: 30px;
-  max-width: 550px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-  border-radius: 8px;
-}
-
-.popup:target {
-  display: flex;
-}
-
-.close-btn {
-  display: inline-block;
-  margin-top: 20px;
+.section-title {
+  text-align: center;
   color: #95BF47;
-  text-decoration: none;
+  margin-bottom: 30px;
 }
 
-/* MOBILE */
-@media(max-width: 768px) {
-  .image-text {
-    font-size: 13px;
+/* GRID */
+.grid {
+  display: grid;
+  gap: 20px;
+}
+
+@media(min-width:768px){
+  .grid-2 {
+    grid-template-columns: repeat(2,1fr);
   }
 }
+
+/* CARD */
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* IMAGE */
+.image {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* CTA SECTION */
+.cta {
+  text-align: center;
+  background: #f4f7f1;
+  padding: 60px 20px;
+}
+
 </style>
 </head>
 
@@ -226,90 +120,91 @@ p {
 
 <!-- HEADER -->
 <div class="header">
-  <label for="menu-toggle" class="menu-icon">&#9776;</label>
-  <div class="logo">SHOPIFY EXPERT</div>
+  <div>SHOPIFY EXPERT</div>
 </div>
 
-<input type="checkbox" id="menu-toggle">
-
-<label for="menu-toggle" class="overlay"></label>
-
-<!-- SIDE MENU -->
-<div class="side-menu">
-  <div class="menu-title">Shopify Specialist</div>
-
-  <a href="#main" class="menu-item" onclick="document.getElementById('menu-toggle').checked=false">Main Page</a>
-  <a href="#about-popup" class="menu-item" onclick="document.getElementById('menu-toggle').checked=false">About Me</a>
-  <a href="#services-popup" class="menu-item" onclick="document.getElementById('menu-toggle').checked=false">Services</a>
-  <a href="YOUR_UPWORK_LINK_HERE" class="menu-item" onclick="document.getElementById('menu-toggle').checked=false">Hire Me</a>
-</div>
-
-<!-- MAIN -->
-<div class="container" id="main">
-
-  <div class="image-block">
-    <div class="image-container">
-      <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df" alt="Shopify Work">
-    </div>
-    <div class="image-text">
-      I help build clean, structured, and efficient Shopify stores.
-    </div>
-  </div>
-
-  <h2 class="section-title">ABOUT THE SPECIALIST</h2>
-  <div class="line"></div>
-
+<!-- HERO -->
+<section class="hero">
+  <h1>Clean & Structured Shopify Stores That Are Easy to Manage</h1>
   <p>
-    I am a detail-oriented and reliable Shopify Specialist dedicated to helping merchants build well-organized, high-performing online stores.<br><br>
-
-    I help set up and manage Shopify stores with a focus on clean structure and accurate product data. I work with product uploads, collections, and store organization, ensuring everything is clear and easy to navigate.<br><br>
-
-    My background in data analytics allows me to work in a structured and precise way. I focus on accuracy, organization, and consistency — especially with large product catalogs.<br><br>
-
-    I ensure every store is logically structured, easy to manage, and professionally organized.
+    I help merchants organize, structure, and optimize Shopify stores with accurate product data and clean setup — especially for growing catalogs.
   </p>
+  <a href="https://www.upwork.com/freelancers/~017444a64d53a8ae89?viewMode=1" class="btn" target="_blank">
+    View Upwork Profile
+  </a>
+</section>
 
-  <h2 class="section-title">SERVICES</h2>
-  <div class="line"></div>
+<!-- ABOUT -->
+<section class="section">
+  <h2 class="section-title">About Me</h2>
 
-  <p>
-    • Product Upload & Organization<br>
-    • Collection Setup<br>
-    • Store Structuring<br>
-    • Data Accuracy Optimization
-  </p>
+  <div class="grid grid-2">
+    <div>
+      <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df" class="image">
+    </div>
 
-  <h2 class="section-title">HIRE ME</h2>
-  <div class="line"></div>
-
-  <a href="YOUR_UPWORK_LINK_HERE" class="btn">View Upwork Profile</a>
-
-</div>
-
-<!-- POPUPS -->
-<div id="about-popup" class="popup">
-  <div class="popup-content">
-    <p>
-      I am a detail-oriented and reliable Shopify Specialist dedicated to helping merchants build well-organized, high-performing online stores.<br><br>
-
-      I help set up and manage Shopify stores with a focus on clean structure and accurate product data. I work with product uploads, collections, and store organization.<br><br>
-
-      My background in data analytics helps me maintain accuracy and structure even in complex catalogs.<br><br>
-
-      I deliver reliable, clean, and organized results.
-    </p>
-    <a href="#" class="close-btn">Close</a>
+    <div>
+      <p>
+        I am a detail-oriented Shopify Specialist focused on building well-organized, high-performing online stores.
+      </p>
+      <p>
+        I work with product uploads, collections, and store structure — ensuring everything is clear, consistent, and easy to manage.
+      </p>
+      <p>
+        With a background in data analytics, I bring precision, organization, and reliability — especially when working with large product catalogs.
+      </p>
+    </div>
   </div>
-</div>
+</section>
 
-<div id="services-popup" class="popup">
-  <div class="popup-content">
-    <p>
-      Product uploads, collections, store structuring, and data organization for Shopify stores.
-    </p>
-    <a href="#" class="close-btn">Close</a>
+<!-- SERVICES -->
+<section class="section">
+  <h2 class="section-title">Services</h2>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Product Upload & Management</h3>
+      <p>Accurate product data, clean formatting, and consistent structure.</p>
+    </div>
+
+    <div class="card">
+      <h3>Collection Setup</h3>
+      <p>Logical grouping for better navigation and customer experience.</p>
+    </div>
+
+    <div class="card">
+      <h3>Store Organization</h3>
+      <p>Clean backend structure that is easy to manage and scale.</p>
+    </div>
+
+    <div class="card">
+      <h3>Data Accuracy</h3>
+      <p>Structured and precise handling of large product catalogs.</p>
+    </div>
   </div>
-</div>
+</section>
+
+<!-- WHY ME -->
+<section class="section">
+  <h2 class="section-title">Why Choose Me</h2>
+
+  <div class="grid">
+    <div class="card">✔ Detail-oriented and structured work approach</div>
+    <div class="card">✔ Strong focus on accuracy and consistency</div>
+    <div class="card">✔ Reliable communication and independent work</div>
+    <div class="card">✔ Clean and scalable Shopify store setup</div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta">
+  <h2>Ready to organize your Shopify store?</h2>
+  <p>Let’s build a clean, structured, and easy-to-manage store.</p>
+  <br>
+  <a href="https://www.upwork.com/freelancers/~017444a64d53a8ae89?viewMode=1" class="btn" target="_blank">
+    Hire Me on Upwork
+  </a>
+</section>
 
 </body>
 </html>

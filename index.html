@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shopify Specialist</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-<style>
 * {
   margin: 0;
   padding: 0;
@@ -31,26 +21,45 @@ body {
   z-index: 1000;
 }
 
-/* HERO WITH BACKGROUND IMAGE */
+/* HERO WITH ANIMATED BACKGROUND */
 .hero {
   height: 100vh;
-  background: 
-    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-    url("https://raw.githubusercontent.com/lusi-design/lusi-design/main/Screenshot%202026-04-25%20130710.png");
-  background-size: cover;
-  background-position: center;
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: #fff;
-  padding: 20px;
 }
 
+/* BACKGROUND LAYER */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("https://raw.githubusercontent.com/lusi-design/lusi-design/main/Screenshot%202026-04-25%20130710.png");
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+
+  animation: zoomBg 6s ease forwards;
+}
+
+/* CONTENT ABOVE BACKGROUND */
 .hero-content {
+  position: relative;
+  z-index: 1;
   max-width: 700px;
+
+  animation: fadeDown 1.5s ease forwards;
+  animation-delay: 1s;
+  opacity: 0;
 }
 
+/* TEXT */
 .hero h1 {
   font-size: 34px;
   margin-bottom: 15px;
@@ -124,79 +133,27 @@ body {
   background: #f4f7f1;
   padding: 60px 20px;
 }
-</style>
-</head>
 
-<body>
+/* ANIMATIONS */
 
-<!-- HEADER -->
-<div class="header">
-  SHOPIFY EXPERT
-</div>
+/* Background zoom */
+@keyframes zoomBg {
+  0% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-content">
-    <h1>Clean & Structured Shopify Stores That Are Easy to Manage</h1>
-    <p>
-      I help merchants organize, structure, and optimize Shopify stores with accurate product data and clean setup.
-    </p>
-    <a href="https://www.upwork.com/freelancers/~017444a64d53a8ae89?viewMode=1" class="btn" target="_blank">
-      View Upwork Profile
-    </a>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="section">
-  <h2 class="section-title">About Me</h2>
-
-  <div class="grid grid-2">
-    <div>
-      <img src="https://raw.githubusercontent.com/lusi-design/lusi-design/main/Gemini_Generated_Image_b68t7xb68t7xb68t.png" class="profile-img">
-    </div>
-
-    <div>
-      <p>
-        I am a detail-oriented and reliable Shopify Specialist dedicated to helping merchants build well-organized, high-performing online stores.
-      </p>
-
-      <p>
-        I work with product uploads, collections, and store structure — ensuring everything is clear, consistent, and easy to manage.
-      </p>
-
-      <p>
-        My background in data analytics allows me to work in a structured and precise way, especially with large product catalogs.
-      </p>
-
-      <p>
-        I ensure every store is logically structured, clean, and efficient to manage.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="section">
-  <h2 class="section-title">Services</h2>
-
-  <div class="grid grid-2">
-    <div class="card">Product Upload & Management</div>
-    <div class="card">Collection Setup</div>
-    <div class="card">Store Organization</div>
-    <div class="card">Data Accuracy Optimization</div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta">
-  <h2>Ready to organize your Shopify store?</h2>
-  <p>Let’s build a clean and structured store.</p>
-  <br>
-  <a href="https://www.upwork.com/freelancers/~017444a64d53a8ae89?viewMode=1" class="btn" target="_blank">
-    Hire Me on Upwork
-  </a>
-</section>
-
-</body>
-</html>
+/* Text from top */
+@keyframes fadeDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

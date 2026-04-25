@@ -16,9 +16,8 @@
 }
 
 body {
-  color: #222;
-  line-height: 1.6;
   background: #fff;
+  color: #222;
 }
 
 /* HEADER */
@@ -34,52 +33,44 @@ body {
 
 /* HERO */
 .hero {
-  height: 100vh;
-  background: #fff; /* FIX: white instead of black */
+  min-height: 100vh;
+  padding: 120px 20px 40px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  position: relative;
-  overflow: hidden;
 }
 
-/* IMAGE WRAPPER */
-.hero-image {
-  width: min(900px, 90%);
-  height: 70vh;
-
-  background: url("https://raw.githubusercontent.com/lusi-design/lusi-design/main/Screenshot%202026-04-25%20130710.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: top center; /* keeps face visible */
-
-  border-radius: 12px;
+/* IMAGE (KEY PART) */
+.hero-img {
+  width: 100%;
+  max-width: 700px; /* controls quality */
+  height: auto;
 
   opacity: 0;
   transform: scale(0.95);
-  animation: imageIn 2.5s ease forwards;
+  animation: imageIn 1.8s ease forwards;
 }
 
 /* TEXT */
 .hero-content {
-  position: absolute;
   max-width: 700px;
-  color: #222; /* FIX: dark text for white background */
+  margin-top: 30px;
 
   opacity: 0;
-  transform: translateY(-30px);
-  animation: textIn 1.5s ease forwards;
-  animation-delay: 1s;
+  transform: translateY(-20px);
+  animation: textIn 1.2s ease forwards;
+  animation-delay: 0.8s;
 }
 
 .hero h1 {
-  font-size: 34px;
+  font-size: 32px;
   margin-bottom: 15px;
 }
 
 .hero p {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 /* BUTTON */
@@ -96,7 +87,7 @@ body {
   background: #7da83b;
 }
 
-/* SECTION */
+/* SECTIONS */
 .section {
   padding: 60px 20px;
   max-width: 1000px;
@@ -122,14 +113,13 @@ body {
   }
 }
 
-/* IMAGE */
+/* PROFILE IMAGE */
 .profile-img {
   width: 100%;
   max-width: 350px;
   border-radius: 12px;
   display: block;
   margin: auto;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 /* CARD */
@@ -162,7 +152,7 @@ body {
 @keyframes textIn {
   from {
     opacity: 0;
-    transform: translateY(-30px);
+    transform: translateY(-20px);
   }
   to {
     opacity: 1;
@@ -174,7 +164,6 @@ body {
 
 <body>
 
-<!-- HEADER -->
 <div class="header">
   SHOPIFY EXPERT
 </div>
@@ -182,7 +171,11 @@ body {
 <!-- HERO -->
 <section class="hero">
 
-  <div class="hero-image"></div>
+  <!-- IMAGE (NOT background anymore) -->
+  <img 
+    src="https://raw.githubusercontent.com/lusi-design/lusi-design/main/Screenshot%202026-04-25%20130710.png" 
+    class="hero-img"
+  >
 
   <div class="hero-content">
     <h1>Clean & Structured Shopify Stores That Are Easy to Manage</h1>
@@ -206,21 +199,10 @@ body {
     </div>
 
     <div>
-      <p>
-        I am a detail-oriented and reliable Shopify Specialist dedicated to helping merchants build well-organized, high-performing online stores.
-      </p>
-
-      <p>
-        I work with product uploads, collections, and store structure — ensuring everything is clear, consistent, and easy to manage.
-      </p>
-
-      <p>
-        My background in data analytics allows me to work in a structured and precise way, especially with large product catalogs.
-      </p>
-
-      <p>
-        I ensure every store is logically structured, clean, and efficient to manage.
-      </p>
+      <p>I am a detail-oriented and reliable Shopify Specialist dedicated to helping merchants build well-organized, high-performing online stores.</p>
+      <p>I work with product uploads, collections, and store structure — ensuring everything is clear, consistent, and easy to manage.</p>
+      <p>My background in data analytics allows me to work in a structured and precise way, especially with large product catalogs.</p>
+      <p>I ensure every store is logically structured, clean, and efficient to manage.</p>
     </div>
   </div>
 </section>
@@ -242,9 +224,7 @@ body {
   <h2>Ready to organize your Shopify store?</h2>
   <p>Let’s build a clean and structured store.</p>
   <br>
-  <a href="https://www.upwork.com/freelancers/~017444a64d53a8ae89?viewMode=1" class="btn" target="_blank">
-    Hire Me on Upwork
-  </a>
+  <a href="#" class="btn">Hire Me on Upwork</a>
 </section>
 
 </body>

@@ -41,10 +41,9 @@ body {
   justify-content: center;
   text-align: center;
   color: #fff;
-  background-color: #000;
 }
 
-/* BACKGROUND IMAGE (FULLY VISIBLE) */
+/* BACKGROUND IMAGE */
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -53,14 +52,14 @@ body {
     linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
     url("https://raw.githubusercontent.com/lusi-design/lusi-design/main/Screenshot%202026-04-25%20130710.png");
 
-  background-size: contain;
+  background-size: cover;
+  background-position: top center; /* IMPORTANT FIX (face visible) */
   background-repeat: no-repeat;
-  background-position: center;
 
   z-index: 0;
 
-  opacity: 0;
-  animation: fadeInBg 2.5s ease forwards;
+  transform: scale(1.05);
+  animation: bgFade 2.5s ease forwards;
 }
 
 /* HERO CONTENT */
@@ -150,12 +149,14 @@ body {
 }
 
 /* ANIMATIONS */
-@keyframes fadeInBg {
+@keyframes bgFade {
   from {
     opacity: 0;
+    transform: scale(1.05);
   }
   to {
     opacity: 1;
+    transform: scale(1);
   }
 }
 

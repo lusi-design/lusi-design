@@ -30,7 +30,6 @@ body {
   position: fixed;
   width: 100%;
   top: 0;
-  z-index: 1000;
 }
 
 /* HERO */
@@ -59,14 +58,13 @@ body {
   text-decoration: none;
   border-radius: 6px;
   display: inline-block;
-  transition: 0.2s;
 }
 
 .btn:hover {
   background: #7da83b;
 }
 
-/* SECTIONS */
+/* SECTION */
 .section {
   padding: 60px 20px;
   max-width: 1000px;
@@ -82,13 +80,24 @@ body {
 /* GRID */
 .grid {
   display: grid;
-  gap: 20px;
+  gap: 30px;
 }
 
 @media(min-width:768px){
   .grid-2 {
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
   }
+}
+
+/* IMAGE */
+.profile-img {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 12px;
+  display: block;
+  margin: auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 /* CARD */
@@ -99,20 +108,12 @@ body {
   box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
-/* IMAGE */
-.image {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-/* CTA SECTION */
+/* CTA */
 .cta {
   text-align: center;
   background: #f4f7f1;
   padding: 60px 20px;
 }
-
 </style>
 </head>
 
@@ -127,7 +128,7 @@ body {
 <section class="hero">
   <h1>Clean & Structured Shopify Stores That Are Easy to Manage</h1>
   <p>
-    I help merchants organize, structure, and optimize Shopify stores with accurate product data and clean setup — especially for growing catalogs.
+    I help merchants organize, structure, and optimize Shopify stores with accurate product data and clean setup.
   </p>
   <a href="https://www.upwork.com/freelancers/~017444a64d53a8ae89?viewMode=1" class="btn" target="_blank">
     View Upwork Profile
@@ -139,21 +140,31 @@ body {
   <h2 class="section-title">About Me</h2>
 
   <div class="grid grid-2">
+
+    <!-- YOUR IMAGE -->
     <div>
-      <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df" class="image">
+      <img src="profile.jpg" alt="Profile Photo" class="profile-img">
     </div>
 
+    <!-- TEXT -->
     <div>
       <p>
-        I am a detail-oriented Shopify Specialist focused on building well-organized, high-performing online stores.
+        I am a detail-oriented and reliable Shopify Specialist dedicated to helping merchants build well-organized, high-performing online stores.
       </p>
+
       <p>
         I work with product uploads, collections, and store structure — ensuring everything is clear, consistent, and easy to manage.
       </p>
+
       <p>
-        With a background in data analytics, I bring precision, organization, and reliability — especially when working with large product catalogs.
+        My background in data analytics allows me to work in a structured and precise way, especially with large product catalogs.
+      </p>
+
+      <p>
+        I ensure every store is logically structured, clean, and efficient to manage.
       </p>
     </div>
+
   </div>
 </section>
 
@@ -162,44 +173,17 @@ body {
   <h2 class="section-title">Services</h2>
 
   <div class="grid grid-2">
-    <div class="card">
-      <h3>Product Upload & Management</h3>
-      <p>Accurate product data, clean formatting, and consistent structure.</p>
-    </div>
-
-    <div class="card">
-      <h3>Collection Setup</h3>
-      <p>Logical grouping for better navigation and customer experience.</p>
-    </div>
-
-    <div class="card">
-      <h3>Store Organization</h3>
-      <p>Clean backend structure that is easy to manage and scale.</p>
-    </div>
-
-    <div class="card">
-      <h3>Data Accuracy</h3>
-      <p>Structured and precise handling of large product catalogs.</p>
-    </div>
+    <div class="card">Product Upload & Management</div>
+    <div class="card">Collection Setup</div>
+    <div class="card">Store Organization</div>
+    <div class="card">Data Accuracy Optimization</div>
   </div>
 </section>
 
-<!-- WHY ME -->
-<section class="section">
-  <h2 class="section-title">Why Choose Me</h2>
-
-  <div class="grid">
-    <div class="card">✔ Detail-oriented and structured work approach</div>
-    <div class="card">✔ Strong focus on accuracy and consistency</div>
-    <div class="card">✔ Reliable communication and independent work</div>
-    <div class="card">✔ Clean and scalable Shopify store setup</div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
+<!-- CTA -->
 <section class="cta">
   <h2>Ready to organize your Shopify store?</h2>
-  <p>Let’s build a clean, structured, and easy-to-manage store.</p>
+  <p>Let’s build a clean and structured store.</p>
   <br>
   <a href="https://www.upwork.com/freelancers/~017444a64d53a8ae89?viewMode=1" class="btn" target="_blank">
     Hire Me on Upwork

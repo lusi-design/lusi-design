@@ -3,160 +3,109 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shopify Specialist</title>
+<title>Shopify Specialist | Portfolio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-* {
+body {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Inter', sans-serif;
+  background: #f7f9fc;
+  color: #1a1a1a;
 }
 
-body {
-  background: #fff;
-  color: #222;
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
 }
 
 /* HEADER */
-.header {
-  background: #95BF47;
-  color: #fff;
-  padding: 15px 20px;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.logo {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.nav {
+  font-size: 14px;
+  color: #555;
 }
 
 /* HERO */
 .hero {
-  min-height: 100vh;
-  padding: 120px 20px 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  padding: 80px 0;
   text-align: center;
 }
 
-/* IMAGE (KEY PART) */
-.hero-img {
-  width: 100%;
-  max-width: 700px; /* controls quality */
-  height: auto;
-
-  opacity: 0;
-  transform: scale(0.95);
-  animation: imageIn 1.8s ease forwards;
-}
-
-/* TEXT */
-.hero-content {
-  max-width: 700px;
-  margin-top: 30px;
-
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: textIn 1.2s ease forwards;
-  animation-delay: 0.8s;
-}
-
 .hero h1 {
-  font-size: 32px;
+  font-size: 42px;
   margin-bottom: 15px;
 }
 
 .hero p {
-  margin-bottom: 20px;
+  font-size: 16px;
+  color: #555;
+  max-width: 600px;
+  margin: auto;
 }
 
-/* BUTTON */
 .btn {
-  background: #95BF47;
+  display: inline-block;
+  margin-top: 25px;
+  padding: 12px 25px;
+  background: #111;
   color: #fff;
-  padding: 14px 22px;
   text-decoration: none;
   border-radius: 6px;
-  display: inline-block;
+  transition: 0.3s;
 }
 
 .btn:hover {
-  background: #7da83b;
+  background: #333;
 }
 
-/* SECTIONS */
+/* SECTION */
 .section {
-  padding: 60px 20px;
-  max-width: 1000px;
-  margin: auto;
+  padding: 60px 0;
 }
 
-.section-title {
-  text-align: center;
-  color: #95BF47;
-  margin-bottom: 30px;
+.section h2 {
+  margin-bottom: 20px;
 }
 
-/* GRID */
 .grid {
   display: grid;
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 20px;
 }
 
-@media(min-width:768px){
-  .grid-2 {
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-  }
-}
-
-/* PROFILE IMAGE */
-.profile-img {
-  width: 100%;
-  max-width: 350px;
-  border-radius: 12px;
-  display: block;
-  margin: auto;
-}
-
-/* CARD */
 .card {
   background: #fff;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border-radius: 10px;
+  border: 1px solid #eee;
 }
 
-/* CTA */
-.cta {
+/* FOOTER */
+footer {
   text-align: center;
-  background: #f4f7f1;
-  padding: 60px 20px;
+  padding: 30px 0;
+  font-size: 14px;
+  color: #777;
 }
 
-/* ANIMATIONS */
-@keyframes imageIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes textIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+/* MOBILE */
+@media(max-width:768px){
+  .hero h1 {
+    font-size: 28px;
   }
 }
 </style>
@@ -164,68 +113,75 @@ body {
 
 <body>
 
-<div class="header">
-  SHOPIFY EXPERT
-</div>
+<div class="container">
 
-<!-- HERO -->
+<header>
+  <div class="logo">SHOPIFY SPECIALIST</div>
+  <div class="nav">Portfolio</div>
+</header>
+
 <section class="hero">
-
-  <!-- IMAGE (NOT background anymore) -->
-  <img 
-    src="https://raw.githubusercontent.com/lusi-design/lusi-design/main/Screenshot%202026-04-25%20130710.png" 
-    class="hero-img"
-  >
-
-  <div class="hero-content">
-    <h1>Clean & Structured Shopify Stores That Are Easy to Manage</h1>
-    <p>
-      I help merchants organize, structure, and optimize Shopify stores with accurate product data and clean setup.
-    </p>
-    <a href="https://www.upwork.com/freelancers/~017444a64d53a8ae89?viewMode=1" class="btn" target="_blank">
-      View Upwork Profile
-    </a>
-  </div>
-
+  <h1>Shopify Store Setup & Organization</h1>
+  <p>
+    I help build and manage Shopify stores with a clear structure, accurate product data,
+    and clean organization — making stores easy to navigate and maintain.
+  </p>
+  <a href="#contact" class="btn">Contact Me</a>
 </section>
 
-<!-- ABOUT -->
 <section class="section">
-  <h2 class="section-title">About Me</h2>
+  <h2>About Me</h2>
+  <p>
+    I work with Shopify stores focusing on product uploads, collections, and store structure.
+    My goal is to keep everything consistent, organized, and easy to manage.
+  </p>
+  <p>
+    With a background in data analytics, I approach every store with precision and structure,
+    ensuring clean formatting and accurate product information.
+  </p>
+</section>
 
-  <div class="grid grid-2">
-    <div>
-      <img src="https://raw.githubusercontent.com/lusi-design/lusi-design/main/Gemini_Generated_Image_b68t7xb68t7xb68t.png" class="profile-img">
+<section class="section">
+  <h2>What I Do</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>Product Uploads</h3>
+      <p>Accurate product listing with correct formatting and structured data.</p>
     </div>
 
-    <div>
-      <p>I am a detail-oriented and reliable Shopify Specialist dedicated to helping merchants build well-organized, high-performing online stores.</p>
-      <p>I work with product uploads, collections, and store structure — ensuring everything is clear, consistent, and easy to manage.</p>
-      <p>My background in data analytics allows me to work in a structured and precise way, especially with large product catalogs.</p>
-      <p>I ensure every store is logically structured, clean, and efficient to manage.</p>
+    <div class="card">
+      <h3>Collections Setup</h3>
+      <p>Logical and clear product grouping for better navigation.</p>
     </div>
+
+    <div class="card">
+      <h3>Store Organization</h3>
+      <p>Clean structure for easy management and scalability.</p>
+    </div>
+
+    <div class="card">
+      <h3>Data Accuracy</h3>
+      <p>Attention to detail in product info, tags, and consistency.</p>
+    </div>
+
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="section">
-  <h2 class="section-title">Services</h2>
-
-  <div class="grid grid-2">
-    <div class="card">Product Upload & Management</div>
-    <div class="card">Collection Setup</div>
-    <div class="card">Store Organization</div>
-    <div class="card">Data Accuracy Optimization</div>
-  </div>
+<section class="section" id="contact">
+  <h2>Contact</h2>
+  <p>
+    Available for freelance work and Shopify store setup projects.
+  </p>
+  <a href="mailto:your@email.com" class="btn">Email Me</a>
 </section>
 
-<!-- CTA -->
-<section class="cta">
-  <h2>Ready to organize your Shopify store?</h2>
-  <p>Let’s build a clean and structured store.</p>
-  <br>
-  <a href="#" class="btn">Hire Me on Upwork</a>
-</section>
+<footer>
+  © 2026 Shopify Specialist Portfolio
+</footer>
+
+</div>
 
 </body>
 </html>

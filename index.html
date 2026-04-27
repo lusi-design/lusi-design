@@ -1,135 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shopify Specialist</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-<style>
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background: #fff;
-  color: #111;
-  padding-top: 55px;
-}
-
-/* ===== TOP BAR ===== */
-.topbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 55px;
-  background: #95BF47;
-  display: flex;
-  align-items: center;
-  padding: 0 15px;
-  z-index: 9999;
-  transition: transform 0.3s ease;
-}
-
-.menu-icon {
-  font-size: 22px;
-  cursor: pointer;
-  color: #fff;
-}
-
-.topbar-title {
-  font-weight: 600;
-  color: #fff;
-  margin-left: 15px;
-  white-space: nowrap;
-}
-
-.topbar.hide {
-  transform: translateY(-100%);
-}
-
-/* ===== SIDE MENU ===== */
-.side-menu {
-  position: fixed;
-  top: 0;
-  left: -260px;
-  width: 260px;
-  height: 100%;
-  background: #95BF47;
-  padding-top: 70px;
-  transition: 0.4s;
-  z-index: 10000;
-}
-
-.side-menu a {
-  display: block;
-  padding: 15px 20px;
-  color: #fff;
-  text-decoration: none;
-}
-
-.side-menu.active {
-  left: 0;
-}
-
-/* ===== HERO SPLIT LAYOUT ===== */
 .hero {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 100vh;
-  padding: 0 8%;
+  padding: 0;
   overflow: hidden;
 }
 
 /* LEFT TEXT */
 .hero-content {
   max-width: 520px;
+  padding-left: 8%;
   z-index: 2;
 }
 
-.hero-content h1 {
-  margin-bottom: 10px;
-}
-
-.hero-content p {
-  margin-top: 0;
-  line-height: 1.5;
-}
-
-/* BUTTON */
-.btn {
-  display: inline-block;
-  padding: 12px 25px;
-  background: #111;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 30px;
-}
-
-/* RIGHT IMAGE */
+/* RIGHT FULL HEIGHT IMAGE BACKGROUND */
 .hero-image {
   width: 50%;
   height: 100vh;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
   position: relative;
   overflow: hidden;
 }
 
-/* IMAGE CONTROL */
+/* IMAGE - IMPORTANT FIX */
 .hero-image img {
-  height: 85%;
-  width: auto;
+  width: 100%;
+  height: 100%;
+  
+  /* KEY: fills area like background but keeps person scale natural */
   object-fit: cover;
 
-  /* makes person smaller in frame */
-  transform: scale(0.88);
-
-  /* shifts framing so person sits right side */
+  /* adjust framing so person sits right */
   object-position: 70% center;
 }
 
@@ -138,124 +39,5 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.20);
+  background: rgba(255,255,255,0.18);
 }
-
-/* ===== SECTIONS ===== */
-.section {
-  padding: 60px 20px;
-  max-width: 1100px;
-  margin: auto;
-}
-
-/* ===== MOBILE ===== */
-@media(max-width:768px){
-  .hero {
-    flex-direction: column;
-    text-align: center;
-    padding: 40px 20px;
-    height: auto;
-  }
-
-  .hero-content {
-    max-width: 100%;
-  }
-
-  .hero-image {
-    width: 100%;
-    height: 400px;
-    justify-content: center;
-    margin-top: 20px;
-  }
-
-  .hero-image img {
-    height: 100%;
-    transform: scale(1);
-  }
-}
-</style>
-</head>
-
-<body>
-
-<!-- TOP BAR -->
-<div class="topbar" id="topbar">
-  <div class="menu-icon" onclick="toggleMenu()">☰</div>
-  <div class="topbar-title">SHOPIFY EXPERT</div>
-</div>
-
-<!-- SIDE MENU -->
-<div class="side-menu" id="menu">
-  <a href="#">Main Page</a>
-  <a href="#about">About The Specialist</a>
-  <a href="#services">Services</a>
-  <a href="#contact">Contact</a>
-</div>
-
-<!-- HERO -->
-<section class="hero">
-
-  <!-- TEXT LEFT -->
-  <div class="hero-content">
-    <h1>Shopify Store Setup & Organization</h1>
-    <p>
-      I help build and manage Shopify stores with structured data and clean organization.
-    </p>
-    <a class="btn" onclick="scrollToBottom()">Contact Me</a>
-  </div>
-
-  <!-- IMAGE RIGHT -->
-  <div class="hero-image">
-    <img src="IMG_1591.JPG" alt="Shopify Specialist">
-  </div>
-
-</section>
-
-<!-- ABOUT -->
-<section class="section" id="about">
-  <h2>About The Specialist</h2>
-  <p>Focused on Shopify store structure, product uploads, and organization.</p>
-</section>
-
-<!-- SERVICES -->
-<section class="section" id="services">
-  <h2>Services</h2>
-  <p>Product Uploads, Collections Setup, Store Organization, Data Accuracy</p>
-</section>
-
-<!-- CONTACT -->
-<section class="section" id="contact">
-  <h2>Contact</h2>
-  <a href="mailto:your@email.com" class="btn">Email Me</a>
-</section>
-
-<script>
-function toggleMenu() {
-  document.getElementById("menu").classList.toggle("active");
-}
-
-function scrollToBottom() {
-  window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: "smooth"
-  });
-}
-
-let lastScroll = 0;
-const topbar = document.getElementById("topbar");
-
-window.addEventListener("scroll", () => {
-  let currentScroll = window.pageYOffset;
-
-  if (currentScroll > lastScroll) {
-    topbar.classList.add("hide");
-  } else {
-    topbar.classList.remove("hide");
-  }
-
-  lastScroll = currentScroll;
-});
-</script>
-
-</body>
-</html>

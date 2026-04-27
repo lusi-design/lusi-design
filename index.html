@@ -13,10 +13,6 @@ body {
   font-family: 'Inter', sans-serif;
   background: #fff;
   color: #111;
-}
-
-/* PREVENT CONTENT GOING OVER TOP BAR */
-body {
   padding-top: 55px;
 }
 
@@ -30,10 +26,9 @@ body {
   background: #95BF47;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0 15px;
-  z-index: 9999; /* highest layer */
-  box-sizing: border-box;
+  z-index: 9999;
+  transition: transform 0.3s ease;
 }
 
 .menu-icon {
@@ -45,9 +40,13 @@ body {
 .topbar-title {
   font-weight: 600;
   color: #fff;
-  margin-right: auto;
-  margin-left: 15px; /* ensures full visibility */
+  margin-left: 15px;
   white-space: nowrap;
+}
+
+/* hide/show on scroll */
+.topbar.hide {
+  transform: translateY(-100%);
 }
 
 /* ===== SIDE MENU ===== */
@@ -92,18 +91,12 @@ body {
   inset: 0;
 
   background-image: url('IMG_1591.JPG');
-
-  /* KEY CHANGE: zoomed OUT so person looks smaller */
   background-size: 110% auto;
-
-  /* slightly higher framing for face visibility */
   background-position: center 15%;
-
   background-repeat: no-repeat;
 
   transform: scale(1.05);
   opacity: 0;
-
   animation: zoomReveal 2s ease forwards;
 }
 
@@ -122,14 +115,22 @@ body {
   z-index: 2;
   max-width: 700px;
   opacity: 0;
-  transform: translateY(-20px);
+  transform: translateY(-10px); /* moved UP */
   animation: textDrop 1.2s ease forwards;
   animation-delay: 2s;
 }
 
-.hero-content h1,
+.hero-content h1 {
+  margin-bottom: 10px;
+}
+
 .hero-content p {
-  color: #111;
+  margin-top: 0;
+}
+
+/* BUTTON lower position */
+.hero-content .btn {
+  margin-top: 35px; /* moved DOWN */
 }
 
 /* ANIMATIONS */
@@ -154,12 +155,12 @@ body {
 /* BUTTON */
 .btn {
   display: inline-block;
-  margin-top: 20px;
   padding: 12px 25px;
   background: #111;
   color: #fff;
   text-decoration: none;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 /* SECTIONS */
@@ -182,7 +183,7 @@ body {
 <body>
 
 <!-- TOP BAR -->
-<div class="topbar">
+<div class="topbar" id="topbar">
   <div class="menu-icon" onclick="toggleMenu()">☰</div>
   <div class="topbar-title">SHOPIFY EXPERT</div>
 </div>
@@ -202,7 +203,7 @@ body {
     <p>
       I help build and manage Shopify stores with structured data and clean organization.
     </p>
-    <a href="#contact" class="btn">Contact Me</a>
+    <a class="btn" onclick="scrollToBottom()">Contact Me</a>
   </div>
 </section>
 
@@ -228,6 +229,30 @@ body {
 function toggleMenu() {
   document.getElementById("menu").classList.toggle("active");
 }
+
+/* Smooth scroll to bottom */
+function scrollToBottom() {
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth"
+  });
+}
+
+/* Hide top bar on scroll down, show on scroll up */
+let lastScroll = 0;
+const topbar = document.getElementById("topbar");
+
+window.addEventListener("scroll", () => {
+  let currentScroll = window.pageYOffset;
+
+  if (currentScroll > lastScroll) {
+    topbar.classList.add("hide"); // scroll down
+  } else {
+    topbar.classList.remove("hide"); // scroll up
+  }
+
+  lastScroll = currentScroll;
+});
 </script>
 
 </body>

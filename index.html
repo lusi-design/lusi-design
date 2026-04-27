@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shopify Specialist | Portfolio</title>
+<title>Shopify Specialist</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -12,47 +12,62 @@
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background: #f7f9fc;
-  color: #1a1a1a;
 }
 
-.container {
-  width: 90%;
-  max-width: 1100px;
-  margin: auto;
+/* ===== MENU ICON ===== */
+.menu-icon {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 1000;
 }
 
-/* HEADER */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 0;
+/* ===== SIDE MENU ===== */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 260px;
+  height: 100%;
+  background: #95BF47;
+  padding-top: 60px;
+  transition: 0.4s;
+  z-index: 999;
 }
 
-.logo {
-  font-weight: 600;
-  font-size: 18px;
+.side-menu a {
+  display: block;
+  padding: 15px 20px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
 }
 
-.nav {
-  font-size: 14px;
-  color: #555;
+.side-menu a:hover {
+  background: rgba(0,0,0,0.1);
 }
 
-/* HERO */
+.side-menu.active {
+  left: 0;
+}
+
+/* ===== HERO ===== */
 .hero {
   position: relative;
-  height: 100vh; /* FULL SCREEN on desktop now */
+  height: 100vh;
+  width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-end; /* text lower */
   justify-content: center;
   text-align: center;
   color: #fff;
   overflow: hidden;
+  padding-bottom: 80px;
 }
 
-/* Background image */
+/* IMAGE */
 .hero::after {
   content: "";
   position: absolute;
@@ -60,16 +75,16 @@ header {
 
   background-image: url('IMG_1591.JPG');
   background-size: cover;
-  background-position: center 30%; /* 👈 KEY FIX (moves image DOWN) */
+  background-position: center 20%; /* moved UP */
   background-repeat: no-repeat;
 
-  transform: scale(1.2); /* slight zoom but not quality loss */
+  transform: scale(1.15);
   opacity: 0;
 
   animation: zoomReveal 2s ease forwards;
 }
 
-/* Overlay */
+/* OVERLAY */
 .hero::before {
   content: "";
   position: absolute;
@@ -78,7 +93,7 @@ header {
   z-index: 1;
 }
 
-/* Text */
+/* TEXT */
 .hero-content {
   position: relative;
   z-index: 2;
@@ -86,12 +101,13 @@ header {
   transform: translateY(-40px);
   animation: textDrop 1.2s ease forwards;
   animation-delay: 2s;
+  max-width: 700px;
 }
 
-/* Animations */
+/* ANIMATIONS */
 @keyframes zoomReveal {
   from {
-    transform: scale(1.2);
+    transform: scale(1.15);
     opacity: 0;
   }
   to {
@@ -110,26 +126,19 @@ header {
 /* BUTTON */
 .btn {
   display: inline-block;
-  margin-top: 25px;
+  margin-top: 20px;
   padding: 12px 25px;
   background: #111;
   color: #fff;
   text-decoration: none;
   border-radius: 6px;
-  transition: 0.3s;
 }
 
-.btn:hover {
-  background: #333;
-}
-
-/* SECTION */
+/* SECTIONS */
 .section {
-  padding: 60px 0;
-}
-
-.section h2 {
-  margin-bottom: 20px;
+  padding: 60px 20px;
+  max-width: 1100px;
+  margin: auto;
 }
 
 .grid {
@@ -145,22 +154,15 @@ header {
   border: 1px solid #eee;
 }
 
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 30px 0;
-  font-size: 14px;
-  color: #777;
-}
-
 /* MOBILE */
 @media(max-width:768px){
   .hero {
-    height: 100vh;
+    align-items: flex-end;
+    padding-bottom: 60px;
   }
 
   .hero::after {
-    background-position: center top; /* keep face visible on mobile */
+    background-position: center top;
   }
 }
 </style>
@@ -168,73 +170,57 @@ footer {
 
 <body>
 
-<div class="container">
+<!-- MENU ICON -->
+<div class="menu-icon" onclick="toggleMenu()">☰</div>
 
-<header>
-  <div class="logo">SHOPIFY SPECIALIST</div>
-  <div class="nav">Portfolio</div>
-</header>
+<!-- SIDE MENU -->
+<div class="side-menu" id="menu">
+  <a href="#">Main Page</a>
+  <a href="#about">About The Specialist</a>
+  <a href="#services">Services</a>
+  <a href="#contact">Contact</a>
+</div>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-content">
     <h1>Shopify Store Setup & Organization</h1>
     <p>
       I help build and manage Shopify stores with a clear structure, accurate product data,
-      and clean organization — making stores easy to navigate and maintain.
+      and clean organization.
     </p>
     <a href="#contact" class="btn">Contact Me</a>
   </div>
 </section>
 
-<section class="section">
+<!-- ABOUT -->
+<section class="section" id="about">
   <h2>About Me</h2>
-  <p>
-    I work with Shopify stores focusing on product uploads, collections, and store structure.
-    My goal is to keep everything consistent, organized, and easy to manage.
-  </p>
-  <p>
-    With a background in data analytics, I approach every store with precision and structure,
-    ensuring clean formatting and accurate product information.
-  </p>
+  <p>I organize Shopify stores with clean structure and accurate product data.</p>
 </section>
 
-<section class="section">
-  <h2>What I Do</h2>
-
+<!-- SERVICES -->
+<section class="section" id="services">
+  <h2>Services</h2>
   <div class="grid">
-    <div class="card">
-      <h3>Product Uploads</h3>
-      <p>Accurate product listing with correct formatting and structured data.</p>
-    </div>
-
-    <div class="card">
-      <h3>Collections Setup</h3>
-      <p>Logical and clear product grouping for better navigation.</p>
-    </div>
-
-    <div class="card">
-      <h3>Store Organization</h3>
-      <p>Clean structure for easy management and scalability.</p>
-    </div>
-
-    <div class="card">
-      <h3>Data Accuracy</h3>
-      <p>Attention to detail in product info, tags, and consistency.</p>
-    </div>
+    <div class="card">Product Uploads</div>
+    <div class="card">Collections Setup</div>
+    <div class="card">Store Organization</div>
+    <div class="card">Data Accuracy</div>
   </div>
 </section>
 
+<!-- CONTACT -->
 <section class="section" id="contact">
   <h2>Contact</h2>
-  <p>Available for freelance work and Shopify store setup projects.</p>
   <a href="mailto:your@email.com" class="btn">Email Me</a>
 </section>
 
-<footer>
-  © 2026 Shopify Specialist Portfolio
-</footer>
-
-</div>
+<script>
+function toggleMenu() {
+  document.getElementById("menu").classList.toggle("active");
+}
+</script>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-```html id="p8m2kc"
+```html id="v9k2mf"
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shopify Specialist</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 body {
@@ -27,7 +27,7 @@ body {
   background: #95BF47;
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  padding: 0 15px;
   z-index: 9999;
   transition: transform 0.3s ease;
   box-sizing: border-box;
@@ -42,10 +42,11 @@ body {
 .topbar-title {
   font-weight: 600;
   color: #fff;
-  margin-left: 14px;
+  margin-left: 15px;
   white-space: nowrap;
 }
 
+/* hide/show on scroll */
 .topbar.hide {
   transform: translateY(-100%);
 }
@@ -68,134 +69,114 @@ body {
   padding: 15px 20px;
   color: #fff;
   text-decoration: none;
-  font-weight: 500;
 }
 
 .side-menu.active {
   left: 0;
 }
 
-/* ===== HERO (MODERN AGENCY LAYOUT) ===== */
+/* ===== HERO ===== */
 .hero {
-  height: calc(100vh - 55px);
+  position: relative;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 6%;
-  box-sizing: border-box;
-}
-
-/* LEFT TEXT */
-.hero-text {
-  flex: 1;
-  max-width: 520px;
-  z-index: 2;
-  animation: fadeIn 1.2s ease forwards;
-  opacity: 0;
-}
-
-.hero-text h1 {
-  font-size: 42px;
-  margin-bottom: 14px;
-  line-height: 1.2;
-}
-
-.hero-text p {
-  font-size: 16px;
-  color: #444;
-  line-height: 1.6;
-}
-
-/* CTA */
-.btn {
-  display: inline-block;
-  margin-top: 25px;
-  padding: 12px 26px;
-  background: #111;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 6px;
-}
-
-/* RIGHT IMAGE PANEL */
-.hero-image {
-  flex: 1;
-  height: 80vh;
-  max-height: 620px;
-  position: relative;
+  text-align: center;
   overflow: hidden;
-  border-radius: 18px;
-  animation: imageReveal 1.5s ease forwards;
-  opacity: 0;
 }
 
-/* IMAGE (NO DISTORTION) */
-.hero-image::before {
+/* IMAGE */
+.hero::after {
   content: "";
   position: absolute;
   inset: 0;
 
   background-image: url('IMG_1591.JPG');
-  background-size: cover;
-  background-position: center 20%;
+  background-size: 110% auto;
+  background-position: center 15%;
   background-repeat: no-repeat;
 
-  transform: scale(1.08);
+  transform: scale(1.05);
+  opacity: 0;
+  animation: zoomReveal 2s ease forwards;
 }
 
-/* subtle white overlay */
-.hero-image::after {
+/* WHITE OVERLAY */
+.hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.55);
+  z-index: 1;
+}
+
+/* TEXT */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  opacity: 0;
+  transform: translateY(-45px); /* ⬅️ moved further UP */
+  animation: textDrop 1.2s ease forwards;
+  animation-delay: 2s;
+}
+
+.hero-content h1 {
+  margin-bottom: 10px;
+}
+
+.hero-content p {
+  margin-top: 0;
+}
+
+/* BUTTON */
+.hero-content .btn {
+  margin-top: 35px;
 }
 
 /* ANIMATIONS */
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes imageReveal {
+@keyframes zoomReveal {
   from {
+    transform: scale(1.05);
     opacity: 0;
-    transform: scale(1.03);
   }
   to {
-    opacity: 1;
     transform: scale(1);
+    opacity: 1;
   }
 }
 
-/* ===== SECTIONS ===== */
+@keyframes textDrop {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* BUTTON */
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* SECTIONS */
 .section {
-  padding: 70px 6%;
+  padding: 60px 20px;
   max-width: 1100px;
   margin: auto;
 }
 
-/* ===== MOBILE ===== */
-@media(max-width: 900px){
-  .hero {
-    flex-direction: column;
-    height: auto;
-    padding-top: 30px;
-  }
-
-  .hero-text {
-    text-align: center;
-  }
-
-  .hero-text h1 {
-    font-size: 30px;
-  }
-
-  .hero-image {
-    width: 100%;
-    height: 420px;
-    margin-top: 30px;
+/* MOBILE */
+@media(max-width:768px){
+  .hero::after {
+    background-size: cover;
+    background-position: center top;
   }
 }
 </style>
@@ -219,32 +200,25 @@ body {
 
 <!-- HERO -->
 <section class="hero">
-
-  <div class="hero-text">
-    <h1>Shopify Store Setup & Optimization</h1>
+  <div class="hero-content">
+    <h1>Shopify Store Setup & Organization</h1>
     <p>
-      I build and structure Shopify stores with clean architecture, accurate product data,
-      and scalable organization systems designed for growth.
+      I help build and manage Shopify stores with structured data and clean organization.
     </p>
-    <a href="#contact" class="btn" onclick="scrollToBottom()">Contact Me</a>
+    <a class="btn" onclick="scrollToBottom()">Contact Me</a>
   </div>
-
-  <div class="hero-image"></div>
-
 </section>
 
 <!-- ABOUT -->
 <section class="section" id="about">
   <h2>About The Specialist</h2>
-  <p>
-    Focused on Shopify structure, product management, and clean store organization for scalable ecommerce systems.
-  </p>
+  <p>Focused on Shopify store structure, product uploads, and organization.</p>
 </section>
 
 <!-- SERVICES -->
 <section class="section" id="services">
   <h2>Services</h2>
-  <p>Product Uploads · Collections Setup · Store Organization · Data Accuracy</p>
+  <p>Product Uploads, Collections Setup, Store Organization, Data Accuracy</p>
 </section>
 
 <!-- CONTACT -->
@@ -258,7 +232,7 @@ function toggleMenu() {
   document.getElementById("menu").classList.toggle("active");
 }
 
-/* scroll to bottom */
+/* smooth scroll to bottom */
 function scrollToBottom() {
   window.scrollTo({
     top: document.body.scrollHeight,
@@ -271,15 +245,15 @@ let lastScroll = 0;
 const topbar = document.getElementById("topbar");
 
 window.addEventListener("scroll", () => {
-  let current = window.pageYOffset;
+  let currentScroll = window.pageYOffset;
 
-  if (current > lastScroll) {
+  if (currentScroll > lastScroll) {
     topbar.classList.add("hide");
   } else {
     topbar.classList.remove("hide");
   }
 
-  lastScroll = current;
+  lastScroll = currentScroll;
 });
 </script>
 

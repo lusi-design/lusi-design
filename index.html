@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +15,11 @@ body {
   color: #111;
 }
 
+/* PREVENT CONTENT GOING OVER TOP BAR */
+body {
+  padding-top: 55px;
+}
+
 /* ===== TOP BAR ===== */
 .topbar {
   position: fixed;
@@ -28,7 +32,8 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 15px;
-  z-index: 1000;
+  z-index: 9999; /* highest layer */
+  box-sizing: border-box;
 }
 
 .menu-icon {
@@ -40,6 +45,9 @@ body {
 .topbar-title {
   font-weight: 600;
   color: #fff;
+  margin-right: auto;
+  margin-left: 15px; /* ensures full visibility */
+  white-space: nowrap;
 }
 
 /* ===== SIDE MENU ===== */
@@ -52,7 +60,7 @@ body {
   background: #95BF47;
   padding-top: 70px;
   transition: 0.4s;
-  z-index: 999;
+  z-index: 10000;
 }
 
 .side-menu a {
@@ -74,7 +82,6 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding-top: 55px; /* space for topbar */
   overflow: hidden;
 }
 
@@ -85,17 +92,22 @@ body {
   inset: 0;
 
   background-image: url('IMG_1591.JPG');
-  background-size: cover;
-  background-position: center 25%; /* keeps face visible */
+
+  /* KEY CHANGE: zoomed OUT so person looks smaller */
+  background-size: 110% auto;
+
+  /* slightly higher framing for face visibility */
+  background-position: center 15%;
+
   background-repeat: no-repeat;
 
-  transform: scale(1.12);
+  transform: scale(1.05);
   opacity: 0;
 
   animation: zoomReveal 2s ease forwards;
 }
 
-/* WHITE OVERLAY (instead of dark) */
+/* WHITE OVERLAY */
 .hero::before {
   content: "";
   position: absolute;
@@ -110,7 +122,7 @@ body {
   z-index: 2;
   max-width: 700px;
   opacity: 0;
-  transform: translateY(-20px); /* slightly upward */
+  transform: translateY(-20px);
   animation: textDrop 1.2s ease forwards;
   animation-delay: 2s;
 }
@@ -123,7 +135,7 @@ body {
 /* ANIMATIONS */
 @keyframes zoomReveal {
   from {
-    transform: scale(1.12);
+    transform: scale(1.05);
     opacity: 0;
   }
   to {
@@ -157,26 +169,10 @@ body {
   margin: auto;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-  gap: 20px;
-}
-
-.card {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid #eee;
-}
-
 /* MOBILE */
 @media(max-width:768px){
-  .hero {
-    padding-top: 55px;
-  }
-
   .hero::after {
+    background-size: cover;
     background-position: center top;
   }
 }
@@ -219,13 +215,7 @@ body {
 <!-- SERVICES -->
 <section class="section" id="services">
   <h2>Services</h2>
-
-  <div class="grid">
-    <div class="card">Product Uploads</div>
-    <div class="card">Collections Setup</div>
-    <div class="card">Store Organization</div>
-    <div class="card">Data Accuracy</div>
-  </div>
+  <p>Product Uploads, Collections Setup, Store Organization, Data Accuracy</p>
 </section>
 
 <!-- CONTACT -->
@@ -242,4 +232,3 @@ function toggleMenu() {
 
 </body>
 </html>
-```

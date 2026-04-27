@@ -1,4 +1,3 @@
-```html id="v9k2mf"
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +29,6 @@ body {
   padding: 0 15px;
   z-index: 9999;
   transition: transform 0.3s ease;
-  box-sizing: border-box;
 }
 
 .menu-icon {
@@ -46,7 +44,6 @@ body {
   white-space: nowrap;
 }
 
-/* hide/show on scroll */
 .topbar.hide {
   transform: translateY(-100%);
 }
@@ -82,7 +79,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   overflow: hidden;
 }
 
@@ -93,16 +89,18 @@ body {
   inset: 0;
 
   background-image: url('IMG_1591.JPG');
-  background-size: 110% auto;
-  background-position: center 15%;
+
+  /* SHIFT IMAGE LEFT + WIDER COVERAGE */
+  background-size: 130% auto;
+  background-position: 30% 15%;
   background-repeat: no-repeat;
 
-  transform: scale(1.05);
+  transform: scale(1.02);
   opacity: 0;
   animation: zoomReveal 2s ease forwards;
 }
 
-/* WHITE OVERLAY */
+/* OVERLAY */
 .hero::before {
   content: "";
   position: absolute;
@@ -116,18 +114,13 @@ body {
   position: relative;
   z-index: 2;
   max-width: 700px;
+
   opacity: 0;
-  transform: translateY(-45px); /* ⬅️ moved further UP */
+  transform: translate(80px, -10px);
   animation: textDrop 1.2s ease forwards;
   animation-delay: 2s;
-}
 
-.hero-content h1 {
-  margin-bottom: 10px;
-}
-
-.hero-content p {
-  margin-top: 0;
+  text-align: left;
 }
 
 /* BUTTON */
@@ -138,7 +131,7 @@ body {
 /* ANIMATIONS */
 @keyframes zoomReveal {
   from {
-    transform: scale(1.05);
+    transform: scale(1.02);
     opacity: 0;
   }
   to {
@@ -150,7 +143,7 @@ body {
 @keyframes textDrop {
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(80px, 0);
   }
 }
 
@@ -172,11 +165,23 @@ body {
   margin: auto;
 }
 
-/* MOBILE */
+/* MOBILE (UNCHANGED) */
 @media(max-width:768px){
   .hero::after {
     background-size: cover;
     background-position: center top;
+  }
+
+  .hero-content {
+    transform: translateY(-10px);
+    text-align: center;
+  }
+
+  @keyframes textDrop {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 </style>
@@ -232,7 +237,6 @@ function toggleMenu() {
   document.getElementById("menu").classList.toggle("active");
 }
 
-/* smooth scroll to bottom */
 function scrollToBottom() {
   window.scrollTo({
     top: document.body.scrollHeight,
@@ -240,7 +244,6 @@ function scrollToBottom() {
   });
 }
 
-/* hide topbar on scroll down, show on scroll up */
 let lastScroll = 0;
 const topbar = document.getElementById("topbar");
 
@@ -259,4 +262,3 @@ window.addEventListener("scroll", () => {
 
 </body>
 </html>
-```

@@ -119,9 +119,18 @@ body {
   z-index: 2;
   max-width: 700px;
   opacity: 0;
-  transform: translateY(-10px);
+  transform: translateY(-40px); /* moved UP on desktop */
   animation: textDrop 1.2s ease forwards;
   animation-delay: 2s;
+}
+
+/* BIGGER TEXT */
+.hero-content h1 {
+  font-size: 42px;
+}
+
+.hero-content p {
+  font-size: 18px;
 }
 
 .hero-content .btn {
@@ -156,7 +165,7 @@ body {
   margin: auto;
 }
 
-/* NEW TEXT BLOCK */
+/* EXTRA TEXT */
 .extra-text {
   margin-top: 20px;
   font-size: 16px;
@@ -168,6 +177,18 @@ body {
   .hero::after {
     background-size: cover;
     background-position: center top;
+  }
+
+  .hero-content {
+    transform: translateY(-10px); /* less movement on mobile */
+  }
+
+  .hero-content h1 {
+    font-size: 28px;
+  }
+
+  .hero-content p {
+    font-size: 15px;
   }
 }
 </style>
@@ -192,13 +213,11 @@ body {
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <h1>HIRE ME ON UPWORK</h1>
+    <h1>Shopify Store Setup & Organization</h1>
     <p>
       I help build and manage Shopify stores with structured data and clean organization.
     </p>
-    <a class="btn" href="https://www.upwork.com/freelancers/~017444a64d53a8ae89?viewMode=1" target="_blank">
-      VIEW UPWORK PROFILE
-    </a>
+    <a class="btn" onclick="scrollToBottom()">Contact Me</a>
   </div>
 </section>
 
@@ -220,10 +239,12 @@ body {
   <p>Product Uploads, Collections Setup, Store Organization, Data Accuracy</p>
 </section>
 
-<!-- CONTACT -->
+<!-- CONTACT (UPDATED) -->
 <section class="section" id="contact">
-  <h2>Contact</h2>
-  <a href="mailto:your@email.com" class="btn">Email Me</a>
+  <h2>HIRE ME ON UPWORK</h2>
+  <a href="https://www.upwork.com/freelancers/~017444a64d53a8ae89?viewMode=1" target="_blank" class="btn">
+    VIEW UPWORK PROFILE
+  </a>
 </section>
 
 <script>
@@ -240,6 +261,14 @@ document.addEventListener("click", function(event) {
     menu.classList.remove("active");
   }
 });
+
+/* Smooth scroll */
+function scrollToBottom() {
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth"
+  });
+}
 
 /* Hide top bar on scroll */
 let lastScroll = 0;

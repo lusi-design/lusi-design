@@ -7,7 +7,6 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-<!-- ICONS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -23,7 +22,6 @@ body {
 .topbar {
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
   height: 55px;
   background: #95BF47;
@@ -44,7 +42,6 @@ body {
   font-weight: 600;
   color: #fff;
   margin-left: 15px;
-  white-space: nowrap;
 }
 
 .topbar.hide {
@@ -71,11 +68,6 @@ body {
   padding: 15px 20px;
   color: #fff;
   text-decoration: none;
-  font-size: 15px;
-}
-
-.side-menu a i {
-  width: 20px;
 }
 
 .side-menu.active {
@@ -85,23 +77,23 @@ body {
 /* ===== HERO ===== */
 .hero {
   position: relative;
-  height: 100vh; /* full screen height */
+  height: 100vh; /* full screen */
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end; /* pushes text DOWN */
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  padding-top: 140px; /* moves text downward */
+  padding-bottom: 100px; /* space from bottom */
 }
 
-/* IMAGE */
+/* IMAGE (UNCHANGED SIZE) */
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
 
   background-image: url('IMG_1591.JPG');
-  background-size: 90% auto; /* person size unchanged, more space around */
+  background-size: 90% auto; /* KEEP SAME */
   background-position: center 25%;
   background-repeat: no-repeat;
 
@@ -110,7 +102,7 @@ body {
   animation: zoomReveal 2s ease forwards;
 }
 
-/* WHITE OVERLAY */
+/* OVERLAY */
 .hero::before {
   content: "";
   position: absolute;
@@ -125,7 +117,6 @@ body {
   z-index: 2;
   max-width: 700px;
   opacity: 0;
-  transform: translateY(0);
   animation: textDrop 1.2s ease forwards;
   animation-delay: 2s;
 }
@@ -140,7 +131,7 @@ body {
 }
 
 .hero-content .btn {
-  margin-top: 35px;
+  margin-top: 25px;
 }
 
 /* ANIMATIONS */
@@ -150,7 +141,14 @@ body {
 }
 
 @keyframes textDrop {
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(40px); /* animate upward into position */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* BUTTON */
@@ -161,7 +159,6 @@ body {
   color: #fff;
   text-decoration: none;
   border-radius: 6px;
-  cursor: pointer;
 }
 
 /* SECTIONS */
@@ -171,10 +168,8 @@ body {
   margin: auto;
 }
 
-/* EXTRA TEXT */
 .extra-text {
   margin-top: 20px;
-  font-size: 16px;
   line-height: 1.6;
 }
 
@@ -182,7 +177,7 @@ body {
 @media(max-width:768px){
   .hero {
     height: 90vh;
-    padding-top: 80px;
+    padding-bottom: 60px;
   }
 
   .hero::after {
@@ -203,13 +198,11 @@ body {
 
 <body>
 
-<!-- TOP BAR -->
 <div class="topbar" id="topbar">
   <div class="menu-icon" onclick="toggleMenu()">☰</div>
   <div class="topbar-title">SHOPIFY EXPERT</div>
 </div>
 
-<!-- SIDE MENU -->
 <div class="side-menu" id="menu">
   <a href="#"><i class="fas fa-home"></i> Main Page</a>
   <a href="#about"><i class="fas fa-user"></i> About The Specialist</a>
@@ -217,18 +210,14 @@ body {
   <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
 </div>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-content">
     <h1>Shopify Store Setup & Organization</h1>
-    <p>
-      I help build and manage Shopify stores with structured data and clean organization.
-    </p>
+    <p>I help build and manage Shopify stores with structured data and clean organization.</p>
     <a class="btn" onclick="scrollToBottom()">Contact Me</a>
   </div>
 </section>
 
-<!-- ABOUT -->
 <section class="section" id="about">
   <h2>About The Specialist</h2>
   <p>Focused on Shopify store structure, product uploads, and organization.</p>
@@ -240,13 +229,11 @@ body {
   </div>
 </section>
 
-<!-- SERVICES -->
 <section class="section" id="services">
   <h2>Services</h2>
   <p>Product Uploads, Collections Setup, Store Organization, Data Accuracy</p>
 </section>
 
-<!-- CONTACT -->
 <section class="section" id="contact">
   <h2>HIRE ME ON UPWORK</h2>
   <a href="https://www.upwork.com/freelancers/~017444a64d53a8ae89?viewMode=1" target="_blank" class="btn">
@@ -259,7 +246,6 @@ function toggleMenu() {
   document.getElementById("menu").classList.toggle("active");
 }
 
-/* CLOSE MENU WHEN CLICKING OUTSIDE */
 document.addEventListener("click", function(event) {
   const menu = document.getElementById("menu");
   const icon = document.querySelector(".menu-icon");
@@ -269,7 +255,6 @@ document.addEventListener("click", function(event) {
   }
 });
 
-/* Smooth scroll */
 function scrollToBottom() {
   window.scrollTo({
     top: document.body.scrollHeight,
@@ -277,7 +262,6 @@ function scrollToBottom() {
   });
 }
 
-/* Hide top bar on scroll */
 let lastScroll = 0;
 const topbar = document.getElementById("topbar");
 

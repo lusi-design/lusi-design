@@ -5,9 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shopify Specialist</title>
 
-<!-- NEW FONTS -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -19,7 +17,6 @@ body {
   padding-top: 55px;
 }
 
-/* HEADINGS FONT */
 h1, h2 {
   font-family: 'Playfair Display', serif;
 }
@@ -42,16 +39,13 @@ h1, h2 {
   font-size: 22px;
   cursor: pointer;
   color: #fff;
+  z-index: 10001; /* ALWAYS CLICKABLE */
 }
 
 .topbar-title {
   font-weight: 600;
   color: #fff;
   margin-left: 15px;
-}
-
-.topbar.hide {
-  transform: translateY(-100%);
 }
 
 /* ===== SIDE MENU ===== */
@@ -70,10 +64,15 @@ h1, h2 {
 .side-menu a {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   padding: 15px 20px;
   color: #fff;
   text-decoration: none;
+  font-size: 15px;
+}
+
+.side-menu i {
+  font-size: 16px;
 }
 
 .side-menu.active {
@@ -85,7 +84,7 @@ h1, h2 {
   position: relative;
   height: 100vh;
   display: flex;
-  align-items: center; /* FIXED */
+  align-items: center;
   justify-content: center;
   text-align: center;
   overflow: hidden;
@@ -116,6 +115,7 @@ h1, h2 {
   position: relative;
   z-index: 2;
   max-width: 700px;
+  margin-top: 80px; /* MOVED DOWN */
   opacity: 0;
   animation: textDrop 1.2s ease forwards;
   animation-delay: 2s;
@@ -147,20 +147,19 @@ h1, h2 {
   margin: auto;
   opacity: 0;
   transform: translateY(40px);
-  transition: all 1.4s ease; /* SLOWER */
+  transition: all 1.4s ease;
 }
 
 .section h2 {
   font-size: 34px;
 }
 
-/* SHOW */
 .section.show {
   opacity: 1;
   transform: translate(0);
 }
 
-/* ===== SERVICES CARDS ===== */
+/* ===== SERVICES ===== */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -174,11 +173,6 @@ h1, h2 {
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.05);
   text-align: center;
-  transition: transform 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
 }
 
 .card i {
@@ -187,11 +181,31 @@ h1, h2 {
   margin-bottom: 10px;
 }
 
+/* ===== WHY CHOOSE ME ===== */
+.why-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 20px;
+}
+
+.why-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+}
+
+.why-item i {
+  color: #95BF47;
+  font-size: 22px;
+}
+
 /* ===== MOBILE ===== */
 @media(max-width:768px){
 
-  .hero {
-    height: 100vh;
+  .hero-content {
+    margin-top: 100px;
   }
 
   .hero::after {
@@ -203,27 +217,19 @@ h1, h2 {
     font-size: 30px;
   }
 
-  .services-grid {
+  .services-grid,
+  .why-grid {
     grid-template-columns: 1fr;
   }
 
-  /* SLOWER MOBILE ANIMATIONS */
-  #about {
-    transform: translateY(60px);
-  }
-
-  #services {
-    transform: translateX(120px);
-  }
-
-  #contact {
-    transform: translateX(-120px);
-  }
+  #about { transform: translateY(60px); }
+  #services { transform: translateX(120px); }
+  #contact { transform: translateX(-120px); }
 
   #about.show,
   #services.show,
   #contact.show {
-    transition: all 1.6s ease; /* SLOWER */
+    transition: all 1.6s ease;
     opacity: 1;
     transform: translate(0);
   }
@@ -244,16 +250,16 @@ h1, h2 {
 
 <body>
 
-<div class="topbar" id="topbar">
+<div class="topbar">
   <div class="menu-icon" onclick="toggleMenu()">☰</div>
   <div class="topbar-title">SHOPIFY EXPERT</div>
 </div>
 
 <div class="side-menu" id="menu">
-  <a href="#">Main Page</a>
-  <a href="#about">About</a>
-  <a href="#services">Services</a>
-  <a href="#contact">Contact</a>
+  <a href="#"><i class="fas fa-home"></i> Main Page</a>
+  <a href="#about"><i class="fas fa-user"></i> About The Specialist</a>
+  <a href="#services"><i class="fas fa-briefcase"></i> Services</a>
+  <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
 </div>
 
 <section class="hero">
@@ -273,30 +279,26 @@ h1, h2 {
   <h2>Services</h2>
 
   <div class="services-grid">
-    <div class="card">
-      <i class="fa-brands fa-shopify"></i>
-      <p>Store Setup</p>
-    </div>
+    <div class="card"><i class="fa-brands fa-shopify"></i><p>Store Setup</p></div>
+    <div class="card"><i class="fas fa-upload"></i><p>Product Uploads</p></div>
+    <div class="card"><i class="fas fa-layer-group"></i><p>Collections Setup</p></div>
+    <div class="card"><i class="fas fa-database"></i><p>Store Organization</p></div>
+  </div>
+</section>
 
-    <div class="card">
-      <i class="fas fa-upload"></i>
-      <p>Product Uploads</p>
-    </div>
+<section class="section">
+  <h2>Why Choose Me</h2>
 
-    <div class="card">
-      <i class="fas fa-layer-group"></i>
-      <p>Collections Setup</p>
-    </div>
-
-    <div class="card">
-      <i class="fas fa-database"></i>
-      <p>Store Organization</p>
-    </div>
+  <div class="why-grid">
+    <div class="why-item"><i class="fas fa-bolt"></i> Quick delivery</div>
+    <div class="why-item"><i class="fas fa-tags"></i> Affordable pricing</div>
+    <div class="why-item"><i class="fas fa-headset"></i> Priority support for urgent issues</div>
+    <div class="why-item"><i class="fas fa-heart"></i> Commitment to client satisfaction</div>
   </div>
 </section>
 
 <section class="section" id="contact">
-  <h2>HIRE ME ON UPWORK</h2>
+  <h2>Hire Me On Upwork</h2>
   <a href="https://www.upwork.com/freelancers/~017444a64d53a8ae89?viewMode=1" target="_blank" class="btn">
     VIEW UPWORK PROFILE
   </a>
@@ -306,6 +308,16 @@ h1, h2 {
 function toggleMenu() {
   document.getElementById("menu").classList.toggle("active");
 }
+
+/* CLOSE MENU ON OUTSIDE CLICK */
+document.addEventListener("click", function(e){
+  const menu = document.getElementById("menu");
+  const icon = document.querySelector(".menu-icon");
+
+  if (!menu.contains(e.target) && !icon.contains(e.target)) {
+    menu.classList.remove("active");
+  }
+});
 
 function scrollToBottom() {
   window.scrollTo({

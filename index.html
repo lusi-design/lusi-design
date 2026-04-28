@@ -153,14 +153,18 @@ h1, h2 {
   transform: translate(0);
 }
 
-/* ===== ABOUT TEXT IMPROVEMENT ===== */
-#about p {
+/* ===== PROFESSIONAL ABOUT TEXT ===== */
+.about-text {
+  max-width: 900px;
+  margin-top: 20px;
+}
+
+.about-text p {
   font-size: 17px;
   line-height: 1.9;
-  letter-spacing: 0.3px;
-  max-width: 750px;
-  margin-top: 15px;
+  letter-spacing: 0.2px;
   color: #333;
+  margin-bottom: 18px;
 }
 
 /* ===== SERVICES ===== */
@@ -238,9 +242,14 @@ h1, h2 {
     grid-template-columns: 1fr;
   }
 
-  #about p {
+  .about-text {
+    max-width: 100%;
+  }
+
+  .about-text p {
     font-size: 16px;
     line-height: 1.8;
+    margin-bottom: 16px;
   }
 
   #about { transform: translateY(60px); }
@@ -293,12 +302,24 @@ h1, h2 {
 
 <section class="section" id="about">
   <h2>About The Specialist</h2>
-  <p>
-    Are you in need of a Shopify expert? Look no further! I am here to help and I guarantee to deliver high-quality and efficient results.
-    I work with product uploads, collections, and store organization, making sure everything is clear, consistent, and easy to navigate.
-    I pay close attention to details like product information, formatting, and overall structure.
-    My goal is to help you achieve your vision for your online store.
-  </p>
+
+  <div class="about-text">
+    <p>
+      Are you in need of a Shopify expert? Look no further. I am here to help and guarantee high-quality, efficient results tailored to your store.
+    </p>
+
+    <p>
+      I specialize in product uploads, collections setup, and store organization—ensuring everything is clear, consistent, and easy to navigate for your customers.
+    </p>
+
+    <p>
+      I pay close attention to details such as product information, formatting, and overall structure, helping your store look professional and function smoothly.
+    </p>
+
+    <p>
+      My goal is simple: to help you achieve your vision and build a Shopify store that is clean, structured, and ready to grow.
+    </p>
+  </div>
 </section>
 
 <section class="section" id="services">

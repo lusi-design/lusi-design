@@ -7,6 +7,9 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 body {
   margin: 0;
@@ -44,7 +47,6 @@ body {
   white-space: nowrap;
 }
 
-/* hide/show on scroll */
 .topbar.hide {
   transform: translateY(-100%);
 }
@@ -63,10 +65,17 @@ body {
 }
 
 .side-menu a {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   padding: 15px 20px;
   color: #fff;
   text-decoration: none;
+  font-size: 15px;
+}
+
+.side-menu a i {
+  width: 20px;
 }
 
 .side-menu.active {
@@ -84,23 +93,19 @@ body {
   overflow: hidden;
 }
 
-/* IMAGE */
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
-
   background-image: url('IMG_1591.JPG');
   background-size: 110% auto;
   background-position: center 15%;
   background-repeat: no-repeat;
-
   transform: scale(1.05);
   opacity: 0;
   animation: zoomReveal 2s ease forwards;
 }
 
-/* WHITE OVERLAY */
 .hero::before {
   content: "";
   position: absolute;
@@ -109,54 +114,35 @@ body {
   z-index: 1;
 }
 
-/* TEXT */
 .hero-content {
   position: relative;
   z-index: 2;
   max-width: 700px;
   opacity: 0;
-  transform: translateY(-10px); /* moved UP */
+  transform: translateY(-10px);
   animation: textDrop 1.2s ease forwards;
   animation-delay: 2s;
 }
 
-.hero-content h1 {
-  margin-bottom: 10px;
-}
-
-.hero-content p {
-  margin-top: 0;
-}
-
-/* BUTTON lower position */
 .hero-content .btn {
-  margin-top: 35px; /* moved DOWN */
+  margin-top: 35px;
 }
 
 /* ANIMATIONS */
 @keyframes zoomReveal {
-  from {
-    transform: scale(1.05);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  from { transform: scale(1.05); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 @keyframes textDrop {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* BUTTON */
 .btn {
   display: inline-block;
   padding: 12px 25px;
-  background: #111;
+  background: #95BF47;
   color: #fff;
   text-decoration: none;
   border-radius: 6px;
@@ -168,6 +154,13 @@ body {
   padding: 60px 20px;
   max-width: 1100px;
   margin: auto;
+}
+
+/* NEW TEXT BLOCK */
+.extra-text {
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 /* MOBILE */
@@ -190,20 +183,22 @@ body {
 
 <!-- SIDE MENU -->
 <div class="side-menu" id="menu">
-  <a href="#">Main Page</a>
-  <a href="#about">About The Specialist</a>
-  <a href="#services">Services</a>
-  <a href="#contact">Contact</a>
+  <a href="#"><i class="fas fa-home"></i> Main Page</a>
+  <a href="#about"><i class="fas fa-user"></i> About The Specialist</a>
+  <a href="#services"><i class="fas fa-briefcase"></i> Services</a>
+  <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
 </div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <h1>Shopify Store Setup & Organization</h1>
+    <h1>HIRE ME ON UPWORK</h1>
     <p>
       I help build and manage Shopify stores with structured data and clean organization.
     </p>
-    <a class="btn" onclick="scrollToBottom()">Contact Me</a>
+    <a class="btn" href="https://www.upwork.com/freelancers/~017444a64d53a8ae89?viewMode=1" target="_blank">
+      VIEW UPWORK PROFILE
+    </a>
   </div>
 </section>
 
@@ -211,6 +206,12 @@ body {
 <section class="section" id="about">
   <h2>About The Specialist</h2>
   <p>Focused on Shopify store structure, product uploads, and organization.</p>
+
+  <div class="extra-text">
+    Are you looking for someone to help you upgrade your Shopify store to the next level? 
+    Look no further as you have come to the right place. I will help you take your store to another level. 
+    Let’s build and scale your Shopify store together!
+  </div>
 </section>
 
 <!-- SERVICES -->
@@ -230,15 +231,17 @@ function toggleMenu() {
   document.getElementById("menu").classList.toggle("active");
 }
 
-/* Smooth scroll to bottom */
-function scrollToBottom() {
-  window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: "smooth"
-  });
-}
+/* CLOSE MENU WHEN CLICKING OUTSIDE */
+document.addEventListener("click", function(event) {
+  const menu = document.getElementById("menu");
+  const icon = document.querySelector(".menu-icon");
 
-/* Hide top bar on scroll down, show on scroll up */
+  if (!menu.contains(event.target) && !icon.contains(event.target)) {
+    menu.classList.remove("active");
+  }
+});
+
+/* Hide top bar on scroll */
 let lastScroll = 0;
 const topbar = document.getElementById("topbar");
 
@@ -246,9 +249,9 @@ window.addEventListener("scroll", () => {
   let currentScroll = window.pageYOffset;
 
   if (currentScroll > lastScroll) {
-    topbar.classList.add("hide"); // scroll down
+    topbar.classList.add("hide");
   } else {
-    topbar.classList.remove("hide"); // scroll up
+    topbar.classList.remove("hide");
   }
 
   lastScroll = currentScroll;

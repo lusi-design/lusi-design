@@ -6,7 +6,6 @@
 <title>Shopify Specialist</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -77,32 +76,27 @@ body {
 /* ===== HERO ===== */
 .hero {
   position: relative;
-  height: 100vh; /* full screen */
+  height: 100vh;
   display: flex;
-  align-items: flex-end; /* pushes text DOWN */
+  align-items: flex-end;
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  padding-bottom: 100px; /* space from bottom */
+  padding-bottom: 100px;
 }
 
-/* IMAGE (UNCHANGED SIZE) */
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
-
   background-image: url('IMG_1591.JPG');
-  background-size: 90% auto; /* KEEP SAME */
+  background-size: 90% auto;
   background-position: center 25%;
   background-repeat: no-repeat;
-
-  transform: scale(1);
   opacity: 0;
   animation: zoomReveal 2s ease forwards;
 }
 
-/* OVERLAY */
 .hero::before {
   content: "";
   position: absolute;
@@ -111,7 +105,6 @@ body {
   z-index: 1;
 }
 
-/* TEXT */
 .hero-content {
   position: relative;
   z-index: 2;
@@ -121,34 +114,12 @@ body {
   animation-delay: 2s;
 }
 
-/* TEXT SIZE */
 .hero-content h1 {
   font-size: 42px;
 }
 
 .hero-content p {
   font-size: 18px;
-}
-
-.hero-content .btn {
-  margin-top: 25px;
-}
-
-/* ANIMATIONS */
-@keyframes zoomReveal {
-  from { transform: scale(1.02); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-@keyframes textDrop {
-  from {
-    opacity: 0;
-    transform: translateY(40px); /* animate upward into position */
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* BUTTON */
@@ -159,30 +130,59 @@ body {
   color: #fff;
   text-decoration: none;
   border-radius: 6px;
+  margin-top: 20px;
 }
 
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 .section {
-  padding: 60px 20px;
+  padding: 40px 20px; /* REDUCED spacing */
   max-width: 1100px;
   margin: auto;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
 }
 
-.extra-text {
-  margin-top: 20px;
-  line-height: 1.6;
+/* BIGGER TITLES */
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
 }
 
-/* MOBILE */
+/* SHOW CLASS */
+.section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== SERVICES LAYOUT ===== */
+.services-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.services-text {
+  flex: 1;
+}
+
+.services-icon {
+  flex: 1;
+  text-align: center;
+}
+
+.services-icon i {
+  font-size: 120px;
+  color: #95BF47;
+}
+
+/* ===== MOBILE ANIMATIONS ===== */
 @media(max-width:768px){
+
   .hero {
     height: 90vh;
     padding-bottom: 60px;
-  }
-
-  .hero::after {
-    background-size: cover;
-    background-position: center top;
   }
 
   .hero-content h1 {
@@ -192,6 +192,41 @@ body {
   .hero-content p {
     font-size: 15px;
   }
+
+  .services-container {
+    flex-direction: column;
+  }
+
+  /* Different animations per section */
+  #about {
+    transform: translateY(40px);
+  }
+
+  #services {
+    transform: translateX(100px);
+  }
+
+  #contact {
+    transform: translateX(-100px);
+  }
+
+  #about.show,
+  #services.show,
+  #contact.show {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+/* ANIMATIONS */
+@keyframes zoomReveal {
+  from { transform: scale(1.02); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes textDrop {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
@@ -223,15 +258,25 @@ body {
   <p>Focused on Shopify store structure, product uploads, and organization.</p>
 
   <div class="extra-text">
-    Are you looking for someone to help you upgrade your Shopify store to the next level? 
-    Look no further as you have come to the right place. I will help you take your store to another level. 
+    Are you looking for someone to help you upgrade your Shopify store to the next level?
+    Look no further as you have come to the right place.
     Let’s build and scale your Shopify store together!
   </div>
 </section>
 
 <section class="section" id="services">
-  <h2>Services</h2>
-  <p>Product Uploads, Collections Setup, Store Organization, Data Accuracy</p>
+  <div class="services-container">
+
+    <div class="services-text">
+      <h2>Services</h2>
+      <p>Product Uploads, Collections Setup, Store Organization, Data Accuracy</p>
+    </div>
+
+    <div class="services-icon">
+      <i class="fa-brands fa-shopify"></i>
+    </div>
+
+  </div>
 </section>
 
 <section class="section" id="contact">
@@ -262,6 +307,7 @@ function scrollToBottom() {
   });
 }
 
+/* TOPBAR SCROLL */
 let lastScroll = 0;
 const topbar = document.getElementById("topbar");
 
@@ -275,6 +321,21 @@ window.addEventListener("scroll", () => {
   }
 
   lastScroll = currentScroll;
+});
+
+/* SCROLL ANIMATION */
+const sections = document.querySelectorAll(".section");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+}, { threshold: 0.2 });
+
+sections.forEach(section => {
+  observer.observe(section);
 });
 </script>
 

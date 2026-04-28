@@ -109,7 +109,7 @@ h1, h2 {
   position: relative;
   z-index: 2;
   max-width: 700px;
-  margin-top: 160px; /* MOVED MORE DOWN (desktop) */
+  margin-top: 160px;
   opacity: 0;
   animation: textDrop 1.2s ease forwards;
   animation-delay: 2s;
@@ -151,6 +151,16 @@ h1, h2 {
 .section.show {
   opacity: 1;
   transform: translate(0);
+}
+
+/* ===== ABOUT TEXT IMPROVEMENT ===== */
+#about p {
+  font-size: 17px;
+  line-height: 1.9;
+  letter-spacing: 0.3px;
+  max-width: 750px;
+  margin-top: 15px;
+  color: #333;
 }
 
 /* ===== SERVICES ===== */
@@ -211,7 +221,6 @@ h1, h2 {
     font-size: 30px;
   }
 
-  /* 2 CARDS PER ROW (SMALLER) */
   .services-grid {
     grid-template-columns: repeat(2,1fr);
     gap: 10px;
@@ -227,6 +236,11 @@ h1, h2 {
 
   .why-grid {
     grid-template-columns: 1fr;
+  }
+
+  #about p {
+    font-size: 16px;
+    line-height: 1.8;
   }
 
   #about { transform: translateY(60px); }
@@ -335,7 +349,6 @@ function scrollToBottom() {
   });
 }
 
-/* SCROLL ANIMATION */
 const sections = document.querySelectorAll(".section");
 
 const observer = new IntersectionObserver((entries) => {

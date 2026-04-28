@@ -85,27 +85,32 @@ body {
 /* ===== HERO ===== */
 .hero {
   position: relative;
-  height: 100vh;
+  height: 90vh; /* reduced height */
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* keeps content higher */
   justify-content: center;
   text-align: center;
   overflow: hidden;
+  padding-top: 80px;
 }
 
+/* IMAGE */
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
+
   background-image: url('IMG_1591.JPG');
-  background-size: 110% auto;
-  background-position: center 15%;
+  background-size: 95% auto; /* person appears farther */
+  background-position: center 20%;
   background-repeat: no-repeat;
-  transform: scale(1.05);
+
+  transform: scale(1);
   opacity: 0;
   animation: zoomReveal 2s ease forwards;
 }
 
+/* WHITE OVERLAY */
 .hero::before {
   content: "";
   position: absolute;
@@ -114,17 +119,18 @@ body {
   z-index: 1;
 }
 
+/* TEXT */
 .hero-content {
   position: relative;
   z-index: 2;
   max-width: 700px;
   opacity: 0;
-  transform: translateY(-40px); /* moved UP on desktop */
+  transform: translateY(-40px);
   animation: textDrop 1.2s ease forwards;
   animation-delay: 2s;
 }
 
-/* BIGGER TEXT */
+/* Bigger text */
 .hero-content h1 {
   font-size: 42px;
 }
@@ -139,12 +145,21 @@ body {
 
 /* ANIMATIONS */
 @keyframes zoomReveal {
-  from { transform: scale(1.05); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(1.02);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes textDrop {
-  to { opacity: 1; transform: translateY(0); }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* BUTTON */
@@ -180,7 +195,7 @@ body {
   }
 
   .hero-content {
-    transform: translateY(-10px); /* less movement on mobile */
+    transform: translateY(-10px);
   }
 
   .hero-content h1 {
@@ -239,7 +254,7 @@ body {
   <p>Product Uploads, Collections Setup, Store Organization, Data Accuracy</p>
 </section>
 
-<!-- CONTACT (UPDATED) -->
+<!-- CONTACT -->
 <section class="section" id="contact">
   <h2>HIRE ME ON UPWORK</h2>
   <a href="https://www.upwork.com/freelancers/~017444a64d53a8ae89?viewMode=1" target="_blank" class="btn">

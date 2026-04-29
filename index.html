@@ -252,6 +252,32 @@ h1, h2 {
     margin-bottom: 16px;
   }
 
+  /* ===== TITLE LINES ===== */
+  .section h2 {
+    position: relative;
+    text-align: center;
+    padding: 15px 0;
+  }
+
+  .section h2::before,
+  .section h2::after {
+    content: "";
+    position: absolute;
+    left: 10%;
+    width: 80%;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(to right, transparent, #95BF47, transparent);
+  }
+
+  .section h2::before {
+    top: 0;
+  }
+
+  .section h2::after {
+    bottom: 0;
+  }
+
   #about { transform: translateY(60px); }
   #services { transform: translateX(120px); }
   #contact { transform: translateX(-120px); }
